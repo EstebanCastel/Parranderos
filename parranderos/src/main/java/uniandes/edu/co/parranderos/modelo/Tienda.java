@@ -8,18 +8,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="bares2")
+@Table(name="tiendas")
 @Getter
 @Setter
-public class Bar extends Servicio {
+public class Tienda extends Servicio {
 
-    private Integer capacidad;
-    private String estilo;
+    private String tipo;
+    private String nombre;
     private String pp;
 
-    @OneToMany(mappedBy="bar")
+    @OneToMany(mappedBy="tienda")
     private List<Producto> productos;
 
-    public Bar(){;}
+    public Tienda(){;}
 }
 
