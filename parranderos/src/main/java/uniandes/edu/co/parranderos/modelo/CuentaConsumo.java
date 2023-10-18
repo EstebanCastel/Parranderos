@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.List;
 import lombok.Getter;
@@ -35,6 +36,8 @@ public class CuentaConsumo {
     @OneToMany(mappedBy="cuentaConsumo")
     private List<ReservaSpa> reservaSpas;
 
-    public CuentaConsumo(){;}
-}
+    @OneToOne(mappedBy="cuentaConsumo")
+    private Estadia estadia;
 
+    public CuentaConsumo() {;}
+}

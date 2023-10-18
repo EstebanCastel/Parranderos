@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.sql.Date;
 import java.util.List;
@@ -26,7 +27,6 @@ public class Reserva {
 
     private Date fechaLlegada;
     private Date fechaSalida;
-    private Boolean pazYsalvo;
     private Integer cantidadPersonas;
 
     @ManyToOne
@@ -46,10 +46,8 @@ public class Reserva {
     @ManyToMany
     private List<Habitacion> habitaciones;
 
-    @ManyToOne
-    @JoinColumn(name="cuentaconsumo_id", referencedColumnName = "id")
-    private CuentaConsumo cuentaConsumo;
+    @OneToOne(mappedBy="reserva")
+    private Estadia estadia;
 
-    public Reserva(){;}
+    public Reserva() {;}
 }
-

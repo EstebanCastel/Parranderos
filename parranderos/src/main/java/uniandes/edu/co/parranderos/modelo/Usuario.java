@@ -22,6 +22,9 @@ public class Usuario {
 
     private String nombre;
     private String correo;
+
+    @ManyToOne
+    @JoinColumn(name="rol_id", referencedColumnName = "id")
     private RolUsuario rol;
 
     @ManyToOne
@@ -30,4 +33,3 @@ public class Usuario {
 
     public Usuario(){;}
 }
-
