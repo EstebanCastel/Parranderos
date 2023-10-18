@@ -30,6 +30,11 @@ public class ReservaExtra {
     @JoinColumn(name="prestamoUtencilios_id", referencedColumnName = "id")
     private PrestamoUtencilios prestamoUtencilios;
 
+    @ManyToOne
+    @JoinColumn(name="cuentaconsumo_id", referencedColumnName = "id")
+    private CuentaConsumo cuentaConsumo;
+
+
     public ReservaExtra(){;}
 }
 

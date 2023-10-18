@@ -28,6 +28,12 @@ public class ReservaSpa {
     @JoinColumn(name="spa_id", referencedColumnName = "id")
     private Spa spa;
 
+    @ManyToOne
+    @JoinColumn(name="cuentaconsumo_id", referencedColumnName = "id")
+    private CuentaConsumo cuentaConsumo;
+
+
+
     public ReservaSpa(){;}
 }
 

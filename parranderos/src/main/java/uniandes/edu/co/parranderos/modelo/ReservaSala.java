@@ -32,6 +32,11 @@ public class ReservaSala {
     @JoinColumn(name="salaConferencias_id", referencedColumnName = "id")
     private SalaConferencias salaConferencias;
 
+    @ManyToOne
+    @JoinColumn(name="cuentaconsumo_id", referencedColumnName = "id")
+    private CuentaConsumo cuentaConsumo;
+
+
     public ReservaSala(){;}
 }
 
