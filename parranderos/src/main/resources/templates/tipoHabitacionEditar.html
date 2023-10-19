@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Editar Tipo de Habitación</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Editar Tipo de Habitación</h1>
+        
+        <form th:action="@{'/editartipohabitacion/' + ${tipohabitacion.id} + '/save'}" th:object="${tipohabitacion}" method="post">
+            <div class="form-group">
+                <label>ID</label>
+                <input type="number" th:field="*{id}" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" th:field="*{nombre}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Capacidad</label>
+                <input type="text" th:field="*{capacidad}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Dotación</label>
+                <input type="text" th:field="*{dotacion}" class="form-control" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a th:href="@{/tiposhabitaciones}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>

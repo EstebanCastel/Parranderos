@@ -30,10 +30,10 @@
                         <td th:text="${tipoHabitacion.nombre}"></td>
                         <td th:text="${tipoHabitacion.capacidad}"></td>
                         <td th:text="${tipoHabitacion.dotacion}"></td>
-                        <td th:text="${tipoHabitacion.habitacion.id}"></td>
+                        <td th:text="${tipoHabitacion.habitacion != null ? tipoHabitacion.habitacion.id : 'N/A'}"></td>
                         <td>
-                            <a th:href="@{'/editarTipoHabitacion/' + ${tipoHabitacion.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <a th:href="@{'/eliminarTipoHabitacion/' + ${tipoHabitacion.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a th:href="@{'/editartipohabitacion/' + ${tipoHabitacion.id}}" class="btn btn-warning btn-sm">Editar</a>
+                            <a th:href="@{'/eliminartipohabitacion/' + ${tipoHabitacion.id}}" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 </th:block>
@@ -41,7 +41,7 @@
         </table>
         <div class="text-center">
             <a th:href="@{/}" class="btn btn-primary"> Volver Atrás</a>
-            <a th:href="@{/creartipohabitacion}" class="btn btn-success">Crear Reserva</a>
+            <a th:href="@{/creartipohabitacion}" class="btn btn-success">Crear Tipo de Habitación</a>
             </br>
         </div>
         <br />

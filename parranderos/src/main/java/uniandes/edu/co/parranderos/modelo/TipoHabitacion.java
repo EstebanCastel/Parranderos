@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -17,8 +18,11 @@ import lombok.Setter;
 public class TipoHabitacion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipohabitacion_seq_gen")
+    @SequenceGenerator(name = "tipohabitacion_seq_gen", sequenceName = "SEQ_TIPOHABITACIONES_ID", allocationSize = 1)
     private Integer id;
+
+
 
     private String nombre;
 
