@@ -11,8 +11,9 @@ import java.util.Collection;
 @Repository
 public interface CuentaConsumoRepository extends JpaRepository<CuentaConsumo, Long> {
 
-    @Query(value = "SELECT * FROM consumoservicio", nativeQuery = true)
+    @Query(value = "SELECT * FROM cuentasconsumo", nativeQuery = true)
     Collection<CuentaConsumo> darConsumos();
+
 
 }
 

@@ -1,5 +1,6 @@
 package uniandes.edu.co.parranderos.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class CuentaConsumo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "COSTOTOTAL")
     private Float costoTotal;
     private Integer habitacion;
 

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Lista llegada de un cliente al hotel</title>
+    <title>Lista llegada/salida de un cliente al hotel</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
     <script th:src="@{/css/jquery.min.js}"></script>
     <script th:src="@{/css/bootstrap.min.js}"></script>
@@ -10,7 +10,7 @@
 
 <body>
     <div class="text-center">
-        <h1>Lista de llegada de un cliente al hotel</h1>
+        <h1>Lista de llegada/salida de un cliente al hotel</h1>
 
         <table class="table table-condensed table-hover table-bordered" style="border-collapse:collapse;">
             <thead class="thead-dark">
@@ -18,6 +18,9 @@
                     <th>ID</th>
                     <th>Reserva ID</th>
                     <th>Cuenta Consumo ID</th>
+                    <th>Paz y Salvo</th>
+                    <th>Checkin</th>
+                    <th>Checkout</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -26,7 +29,10 @@
                     <tr>
                         <td th:text="${estadia.id}"></td>
                         <td th:text="${estadia.reserva.id}"></td>
-                        <td th:text="${estadia.cuentaconsumo.id}"></td>
+                        <td th:text="${estadia.cuentaConsumo.id}"></td>
+                        <td th:text="${estadia.pazYsalvo} ? 'Sí' : 'No'"></td>
+                        <td th:text="${estadia.checkin}"></td>
+                        <td th:text="${estadia.checkout}"></td>
                         <td>
                             <a th:href="@{'/editarestadia/' + ${estadia.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <a th:href="@{'/eliminarestadia/' + ${estadia.id}}" class="btn btn-danger btn-sm">Eliminar</a>
@@ -37,6 +43,7 @@
         </table>
         <div class="text-center">
             <a th:href="@{/}" class="btn btn-primary"> Volver Atrás</a>
+            <a th:href="@{/crearestadia}" class="btn btn-success">Crear Reserva</a>
             </br>
         </div>
         <br />

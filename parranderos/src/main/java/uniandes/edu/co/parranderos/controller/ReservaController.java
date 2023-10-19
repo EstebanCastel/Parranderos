@@ -14,8 +14,8 @@ public class ReservaController {
 
     @GetMapping("/reservas")
     public String reservas(Model model) {
-        model.addAttribute("reservas", reservaRepository.darReservaciones());
-        return "reservas";
+        model.addAttribute("reservaciones", reservaRepository.darReservaciones());
+        return "reservaciones";
     }
 }
 

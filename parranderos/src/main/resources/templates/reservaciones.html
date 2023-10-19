@@ -16,21 +16,25 @@
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>idfuncion</th>
-                    <th>idcliente</th>
-                    <th>fecha</th>
-                    <th>estado</th>
+                    <th>Fecha Llegada</th>
+                    <th>Fecha Salida</th>
+                    <th>Cantidad Personas</th>
+                    <th>ID Hotel</th>
+                    <th>ID Plan Consumo</th>
+                    <th>ID Estadía</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <th:block th:each="reserva : ${reservas}">
+                <th:block th:each="reserva : ${reservaciones}">
                     <tr>
-                        <td th:text="${reserva.idreserva}"></td>
-                        <td th:text="${reserva.idfuncion}"></td>
-                        <td th:text="${reserva.idcliente}"></td>
-                        <td th:text="${reserva.fecha}"></td>
-                        <td th:text="${reserva.estado}"></td>
+                        <td th:text="${reserva.id}"></td>
+                        <td th:text="${reserva.fechaLlegada}"></td>
+                        <td th:text="${reserva.fechaSalida}"></td>
+                        <td th:text="${reserva.cantidadPersonas}"></td>
+                        <td th:text="${reserva.hotel.id}"></td>
+                        <td th:text="${reserva.planConsumo.id}"></td>
+                        <td th:text="${reserva.estadia.id}"></td>
                         <td>
                             <a th:href="@{'/editarReserva/' + ${reserva.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <a th:href="@{'/eliminarReserva/' + ${reserva.id}}" class="btn btn-danger btn-sm">Eliminar</a>
@@ -41,6 +45,7 @@
         </table>
         <div class="text-center">
             <a th:href="@{/}" class="btn btn-primary"> Volver Atrás</a>
+            <a th:href="@{/crearreserva}" class="btn btn-success">Crear Reserva</a>
             </br>
         </div>
         <br />
