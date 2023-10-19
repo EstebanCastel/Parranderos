@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Lista de Usuarios</title>
+    <title>Lista Reservas</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
     <script th:src="@{/css/jquery.min.js}"></script>
     <script th:src="@{/css/bootstrap.min.js}"></script>
@@ -10,30 +10,30 @@
 
 <body>
     <div class="text-center">
-        <h1>Lista de Usuarios</h1>
+        <h1>Lista de Reservas</h1>
 
         <table class="table table-condensed table-hover table-bordered" style="border-collapse:collapse;">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
-                    <th>Hotel ID</th>
+                    <th>idfuncion</th>
+                    <th>idcliente</th>
+                    <th>fecha</th>
+                    <th>estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <th:block th:each="usuario : ${usuarios}">
+                <th:block th:each="reserva : ${reservas}">
                     <tr>
-                        <td th:text="${usuario.id}"></td>
-                        <td th:text="${usuario.nombre}"></td>
-                        <td th:text="${usuario.correo}"></td>
-                        <td th:text="${usuario.rol.nombreRol}"></td>
-                        <td th:text="${usuario.hotel.id}"></td>
+                        <td th:text="${reserva.idreserva}"></td>
+                        <td th:text="${reserva.idfuncion}"></td>
+                        <td th:text="${reserva.idcliente}"></td>
+                        <td th:text="${reserva.fecha}"></td>
+                        <td th:text="${reserva.estado}"></td>
                         <td>
-                            <a th:href="@{'/editarUsuario/' + ${usuario.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <a th:href="@{'/eliminarUsuario/' + ${usuario.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a th:href="@{'/editarReserva/' + ${reserva.id}}" class="btn btn-warning btn-sm">Editar</a>
+                            <a th:href="@{'/eliminarReserva/' + ${reserva.id}}" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 </th:block>

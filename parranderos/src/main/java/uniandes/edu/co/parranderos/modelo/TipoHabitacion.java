@@ -31,4 +31,3 @@ public class TipoHabitacion {
 
     public TipoHabitacion() {;}
 }
-

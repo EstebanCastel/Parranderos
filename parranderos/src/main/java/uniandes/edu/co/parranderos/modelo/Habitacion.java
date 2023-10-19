@@ -1,5 +1,6 @@
 package uniandes.edu.co.parranderos.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,8 @@ public class Habitacion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Float costoNoche;
+    @Column(name = "COSTONOCHE")
+    private Double costoNoche;
 
     @OneToMany(mappedBy="habitacion")
     private List<Producto> productos;

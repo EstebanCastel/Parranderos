@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Lista de Usuarios</title>
+    <title>Lista de Habitaciones</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
     <script th:src="@{/css/jquery.min.js}"></script>
     <script th:src="@{/css/bootstrap.min.js}"></script>
@@ -10,30 +10,28 @@
 
 <body>
     <div class="text-center">
-        <h1>Lista de Usuarios</h1>
+        <h1>Lista de Habitaciones</h1>
 
         <table class="table table-condensed table-hover table-bordered" style="border-collapse:collapse;">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
-                    <th>Hotel ID</th>
+                    <th>Costo por Noche</th>
+                    <th>ID Hotel</th>
+                    <th>ID Tipo de Habitación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <th:block th:each="usuario : ${usuarios}">
+                <th:block th:each="habitacion : ${habitaciones}">
                     <tr>
-                        <td th:text="${usuario.id}"></td>
-                        <td th:text="${usuario.nombre}"></td>
-                        <td th:text="${usuario.correo}"></td>
-                        <td th:text="${usuario.rol.nombreRol}"></td>
-                        <td th:text="${usuario.hotel.id}"></td>
+                        <td th:text="${habitacion.id}"></td>
+                        <td th:text="${habitacion.costoNoche}"></td>
+                        <td th:text="${habitacion.hotel.id}"></td>
+                        <td th:text="${habitacion.tipoHabitacion.id}"></td>
                         <td>
-                            <a th:href="@{'/editarUsuario/' + ${usuario.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <a th:href="@{'/eliminarUsuario/' + ${usuario.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a th:href="@{'/editarHabitacion/' + ${habitacion.id}}" class="btn btn-warning btn-sm">Editar</a>
+                            <a th:href="@{'/eliminarHabitacion/' + ${habitacion.id}}" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 </th:block>

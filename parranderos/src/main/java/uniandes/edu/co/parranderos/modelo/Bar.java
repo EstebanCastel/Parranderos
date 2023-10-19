@@ -1,5 +1,6 @@
 package uniandes.edu.co.parranderos.modelo;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name="bares2")
+@DiscriminatorValue("Bar")
 @Getter
 @Setter
 public class Bar extends Servicio {

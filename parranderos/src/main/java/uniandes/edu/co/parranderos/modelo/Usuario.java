@@ -24,8 +24,9 @@ public class Usuario {
     private String correo;
 
     @ManyToOne
-    @JoinColumn(name="rol_id", referencedColumnName = "id")
+    @JoinColumn(name="ROL", referencedColumnName = "id")
     private RolUsuario rol;
+
 
     @ManyToOne
     @JoinColumn(name="hotel_id", referencedColumnName = "id")
