@@ -25,7 +25,13 @@
                 <label>Dotación</label>
                 <input type="text" th:field="*{dotacion}" class="form-control" placeholder="Dotación de la habitación" required>
             </div>
-            
+            <div class="form-group">
+                <label>Habitación</label>
+                <select th:field="*{habitacion.id}" class="form-control">
+                    <option value="">Selecciona una habitación</option>
+                    <option th:each="habitacion : ${habitaciones}" th:value="${habitacion.id}" th:text="${habitacion.id}"></option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a th:href="@{/tiposhabitaciones}" class="btn btn-secondary">Cancelar</a>
         </form>
