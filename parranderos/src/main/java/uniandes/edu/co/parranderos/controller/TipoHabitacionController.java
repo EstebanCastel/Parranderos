@@ -1,5 +1,11 @@
 package uniandes.edu.co.parranderos.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -26,17 +32,25 @@ public class TipoHabitacionController {
 
     @GetMapping("/tiposhabitaciones")
     public String tiposHabitaciones(Model model) {
-        model.addAttribute("tiposhabitaciones", tipoHabitacionRepository.darTiposHabitaciones());
+        List<TipoHabitacion> tiposHabitaciones = new ArrayList<>(tipoHabitacionRepository.darTiposHabitaciones());
+        Map<TipoHabitacion, String> habitacionesStringMap = new HashMap<>();
+
+        for (TipoHabitacion th : tiposHabitaciones) {
+            List<String> ids = th.getHabitaciones().stream().map(h -> h.getId().toString()).collect(Collectors.toList());
+            habitacionesStringMap.put(th, String.join(", ", ids));
+        }
+
+        model.addAttribute("tiposhabitaciones", tiposHabitaciones);
+        model.addAttribute("habitacionesStringMap", habitacionesStringMap);
         return "tiposhabitaciones";
     }
 
     @GetMapping("/creartipohabitacion")
     public String tipoHabitacionForm(Model model) {
         model.addAttribute("tipohabitacion", new TipoHabitacion());
-        model.addAttribute("habitaciones", habitacionRepository.darTiposHabitaciones());
+        model.addAttribute("habitaciones", habitacionRepository.darHabitaciones());
         return "tipoHabitacionNuevo";
     }
-
 
     @GetMapping("/editartipohabitacion/{id}")
     public String tipoHabitacionEditarForm(@PathVariable("id") Integer id, Model model) {
@@ -50,22 +64,21 @@ public class TipoHabitacionController {
         }
     }
 
-
     @PostMapping("/creartipohabitacion/save")
     public String tipoHabitacionGuardar(@ModelAttribute TipoHabitacion tipoHabitacion) {
-        Long habitacionId = Long.valueOf(tipoHabitacion.getHabitacion().getId());
-        Habitacion habitacion = habitacionRepository.findById(habitacionId).orElse(null);
-        if (habitacion == null) {
+        List<Long> habitacionIds = tipoHabitacion.getHabitaciones().stream()
+                                                 .map(habitacion -> Long.valueOf(habitacion.getId()))
+                                                 .collect(Collectors.toList());
+        List<Habitacion> habitaciones = habitacionRepository.findAllById(habitacionIds);
+        
+        if (habitaciones.isEmpty()) {
             return "redirect:/error";
         }
 
-        tipoHabitacion.setHabitacion(habitacion);
-
+        tipoHabitacion.setHabitaciones(habitaciones);
         tipoHabitacionRepository.save(tipoHabitacion);
         return "redirect:/tiposhabitaciones";
     }
-
-
 
     @PostMapping("/eliminartipohabitacion/{id}")
     public String tipoHabitacionEliminar(@PathVariable("id") Integer id, RedirectAttributes redirectAttrs) {
@@ -77,5 +90,4 @@ public class TipoHabitacionController {
         }
         return "redirect:/tiposhabitaciones";
     }
-
 }

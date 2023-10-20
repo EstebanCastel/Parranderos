@@ -35,11 +35,12 @@
                         <td th:text="${tipoHabitacion.nombre}"></td>
                         <td th:text="${tipoHabitacion.capacidad}"></td>
                         <td th:text="${tipoHabitacion.dotacion}"></td>
-                        <td th:text="${tipoHabitacion.habitacion != null ? tipoHabitacion.habitacion.id : 'N/A'}"></td>
+                        <!-- Usamos el mapa habitacionesStringMap para obtener la cadena de IDs de habitaciones -->
+                        <td th:text="${habitacionesStringMap.get(tipoHabitacion)}"></td>
                         <td>
                             <a th:href="@{'/editartipohabitacion/' + ${tipoHabitacion.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <form th:action="@{'/eliminartipohabitacion/' + ${tipoHabitacion.id}}" method="post" style="display:inline;">
-                                <input type="submit" value="Eliminar" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar?');">
+                                <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
                             </form>
                         </td>
                     </tr>

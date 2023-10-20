@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Editar Habitación</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Editar Habitación</h1>
+        
+        <form th:action="@{'/editarHabitacion/' + ${habitacion.id} + '/save'}" th:object="${habitacion}" method="post">
+            <div class="form-group">
+                <label>ID</label>
+                <input type="number" th:field="*{id}" class="form-control" placeholder="ID de la habitación" required>
+            </div>
+            <div class="form-group">
+                <label>Costo por Noche</label>
+                <input type="number" step="0.01" th:field="*{costoNoche}" class="form-control" placeholder="Costo por noche" required>
+            </div>
+            <div class="form-group">
+                <label>Hotel</label>
+                <select th:field="*{hotel.id}" class="form-control">
+                    <option th:each="hotel : ${hoteles}" th:value="${hotel.id}" th:text="${hotel.id}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tipo de Habitación</label>
+                <select th:field="*{tipoHabitacion.id}" class="form-control">
+                    <option th:each="tipoHabitacion : ${tiposHabitaciones}" th:value="${tipoHabitacion.id}" th:text="${tipoHabitacion.nombre}"></option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a th:href="@{/habitaciones}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -4,9 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.CascadeType;
+
+import java.util.List;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,8 +31,9 @@ public class TipoHabitacion {
 
     private String dotacion;
 
-    @OneToOne(mappedBy="tipoHabitacion", cascade = CascadeType.ALL)
-    private Habitacion habitacion;
+    @OneToMany(mappedBy="tipoHabitacion")
+    private List<Habitacion> habitaciones;
+
 
     public TipoHabitacion() {;}
 }
