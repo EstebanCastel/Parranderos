@@ -21,7 +21,9 @@
             </div>
             <div class="form-group">
                 <label>Hotel ID</label>
-                <input type="number" th:field="*{hotel.id}" class="form-control" placeholder="ID del hotel" required>
+                <select th:field="*{hotel.id}" class="form-control">
+                    <option th:each="hotel : ${hoteles}" th:value="${hotel.id}" th:text="${hotel.id}"></option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a th:href="@{/planesconsumo}" class="btn btn-secondary">Cancelar</a>
