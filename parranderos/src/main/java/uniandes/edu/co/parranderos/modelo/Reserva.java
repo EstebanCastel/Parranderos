@@ -39,6 +39,14 @@ public class Reserva {
     @JoinColumn(name="planconsumo_id", referencedColumnName = "id")
     private PlanConsumo planConsumo;
 
+    @ManyToOne
+    @JoinColumn(name="tipohabitacion_id", referencedColumnName = "id")
+    private TipoHabitacion tipoHabitacion;
+
+    @ManyToOne
+    @JoinColumn(name="titular_id", referencedColumnName = "cedula")
+    private Cliente titular;
+
     @OneToMany(mappedBy="reserva")
     private List<Cliente> titulares;
 
@@ -49,4 +57,5 @@ public class Reserva {
     private List<Habitacion> habitaciones;
 
     public Reserva() {;}
+
 }

@@ -15,6 +15,8 @@ import uniandes.edu.co.parranderos.repositorio.EstadiaRepository;
 import uniandes.edu.co.parranderos.repositorio.HotelRepository;
 import uniandes.edu.co.parranderos.repositorio.PlanConsumoRepository;
 import uniandes.edu.co.parranderos.repositorio.ReservaRepository;
+import uniandes.edu.co.parranderos.repositorio.TipoHabitacionRepository;
+import uniandes.edu.co.parranderos.repositorio.ClienteRepository;
 
 @Controller
 public class ReservaController {
@@ -31,6 +33,12 @@ public class ReservaController {
     @Autowired
     private EstadiaRepository estadiaRepository;
 
+    @Autowired
+    private TipoHabitacionRepository tipoHabitacionRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     @GetMapping("/reservas")
     public String reservas(Model model) {
         model.addAttribute("reservaciones", reservaRepository.darReservaciones());
@@ -43,12 +51,14 @@ public class ReservaController {
         model.addAttribute("hoteles", hotelRepository.findAll());
         model.addAttribute("planesConsumo", planConsumoRepository.findAll());
         model.addAttribute("estadias", estadiaRepository.findAll());
+        model.addAttribute("tipoHabitaciones", tipoHabitacionRepository.darTiposHabitaciones());
+        model.addAttribute("clientes", clienteRepository.findAll());
         return "reservaNuevo";
     }
 
     @PostMapping("/crearreserva/save")
     public String reservaGuardar(@ModelAttribute Reserva reserva) {
-        reservaRepository.insertarReserva(reserva.getId(), reserva.getFechaLlegada(), reserva.getFechaSalida(), reserva.getCantidadPersonas(), reserva.getHotel().getId(), reserva.getPlanConsumo().getId());
+        reservaRepository.insertarReserva(reserva.getId(), reserva.getFechaLlegada(), reserva.getFechaSalida(), reserva.getCantidadPersonas(), reserva.getHotel().getId(), reserva.getPlanConsumo().getId(), reserva.getTipoHabitacion().getId(), reserva.getTitular().getCedula());
         return "redirect:/reservas";
     }
 
@@ -57,8 +67,10 @@ public class ReservaController {
         Reserva reserva = reservaRepository.findById(id).orElse(null);
         if (reserva != null) {
             model.addAttribute("reserva", reserva);
-            model.addAttribute("hoteles", hotelRepository.findAll()); // Añadido para mostrar la lista de hoteles en el dropdown
-            model.addAttribute("planesConsumo", planConsumoRepository.findAll()); // Añadido para mostrar la lista de planes de consumo en el dropdown
+            model.addAttribute("hoteles", hotelRepository.findAll());
+            model.addAttribute("planesConsumo", planConsumoRepository.findAll());
+            model.addAttribute("tipoHabitaciones", tipoHabitacionRepository.darTiposHabitaciones());
+            model.addAttribute("clientes", clienteRepository.findAll());
             return "reservaEditar";
         } else {
             return "redirect:/reservas";
@@ -67,7 +79,7 @@ public class ReservaController {
 
     @PostMapping("/editarReserva/{id}/save")
     public String reservaEditarGuardar(@PathVariable("id") Long id, @ModelAttribute Reserva reserva) {
-        reservaRepository.actualizarReserva(id, reserva.getFechaLlegada(), reserva.getFechaSalida(), reserva.getCantidadPersonas(), reserva.getHotel().getId(), reserva.getPlanConsumo().getId());
+        reservaRepository.actualizarReserva(id, reserva.getFechaLlegada(), reserva.getFechaSalida(), reserva.getCantidadPersonas(), reserva.getHotel().getId(), reserva.getPlanConsumo().getId(), reserva.getTipoHabitacion().getId(), reserva.getTitular().getCedula());
         return "redirect:/reservas";
     }
 
