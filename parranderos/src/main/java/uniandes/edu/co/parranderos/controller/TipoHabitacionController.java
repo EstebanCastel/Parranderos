@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import uniandes.edu.co.parranderos.modelo.Habitacion;
 import uniandes.edu.co.parranderos.modelo.TipoHabitacion;
 import uniandes.edu.co.parranderos.repositorio.HabitacionRepository;
 import uniandes.edu.co.parranderos.repositorio.TipoHabitacionRepository;
@@ -52,33 +50,38 @@ public class TipoHabitacionController {
         return "tipoHabitacionNuevo";
     }
 
-    @GetMapping("/editartipohabitacion/{id}")
-    public String tipoHabitacionEditarForm(@PathVariable("id") Integer id, Model model) {
-        TipoHabitacion tipoHabitacion = tipoHabitacionRepository.findById(id).orElse(null);
-        if (tipoHabitacion != null) {
-            model.addAttribute("tipohabitacion", tipoHabitacion);
-            model.addAttribute("habitaciones", habitacionRepository.findAll()); // Añadir la lista de habitaciones al modelo
-            return "tipoHabitacionEditar";
+    @PostMapping("/editartipohabitacion/{id}/save")
+    public String tipoHabitacionActualizar(@PathVariable("id") Integer id, @ModelAttribute TipoHabitacion tipoHabitacion) {
+        // Aquí buscas el tipo de habitación en la base de datos por su ID
+        TipoHabitacion tipoHabitacionExistente = tipoHabitacionRepository.findById(id).orElse(null);
+        if (tipoHabitacionExistente != null) {
+            // Actualiza los valores del tipo de habitación existente con los valores del formulario
+            tipoHabitacionExistente.setNombre(tipoHabitacion.getNombre());
+            tipoHabitacionExistente.setCapacidad(tipoHabitacion.getCapacidad());
+            tipoHabitacionExistente.setDotacion(tipoHabitacion.getDotacion());
+            
+            // Guarda el tipo de habitación actualizado en la base de datos
+            tipoHabitacionRepository.save(tipoHabitacionExistente);
         } else {
-            return "redirect:/tiposhabitaciones";
+            // Puedes manejar el caso en que el tipo de habitación no se encuentra en la base de datos
+            // Por ejemplo, puedes registrar un error o redirigir al usuario a una página de error.
         }
+        return "redirect:/tiposhabitaciones";
     }
+
 
     @PostMapping("/creartipohabitacion/save")
     public String tipoHabitacionGuardar(@ModelAttribute TipoHabitacion tipoHabitacion) {
-        List<Long> habitacionIds = tipoHabitacion.getHabitaciones().stream()
-                                                 .map(habitacion -> Long.valueOf(habitacion.getId()))
-                                                 .collect(Collectors.toList());
-        List<Habitacion> habitaciones = habitacionRepository.findAllById(habitacionIds);
-        
-        if (habitaciones.isEmpty()) {
-            return "redirect:/error";
+        try {
+            tipoHabitacionRepository.save(tipoHabitacion);
+        } catch (Exception e) {
+            // Aquí puedes manejar cualquier error que pueda ocurrir al guardar el tipo de habitación.
+            // Por ejemplo, puedes registrar el error y/o redirigir al usuario a una página de error.
         }
-
-        tipoHabitacion.setHabitaciones(habitaciones);
-        tipoHabitacionRepository.save(tipoHabitacion);
         return "redirect:/tiposhabitaciones";
     }
+
+
 
     @PostMapping("/eliminartipohabitacion/{id}")
     public String tipoHabitacionEliminar(@PathVariable("id") Integer id, RedirectAttributes redirectAttrs) {

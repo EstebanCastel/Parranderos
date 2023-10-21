@@ -24,7 +24,6 @@
                     <th>Nombre</th>
                     <th>Capacidad</th>
                     <th>Dotación</th>
-                    <th>ID Habitación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -35,8 +34,6 @@
                         <td th:text="${tipoHabitacion.nombre}"></td>
                         <td th:text="${tipoHabitacion.capacidad}"></td>
                         <td th:text="${tipoHabitacion.dotacion}"></td>
-                        <!-- Usamos el mapa habitacionesStringMap para obtener la cadena de IDs de habitaciones -->
-                        <td th:text="${habitacionesStringMap.get(tipoHabitacion)}"></td>
                         <td>
                             <a th:href="@{'/editartipohabitacion/' + ${tipoHabitacion.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <form th:action="@{'/eliminartipohabitacion/' + ${tipoHabitacion.id}}" method="post" style="display:inline;">

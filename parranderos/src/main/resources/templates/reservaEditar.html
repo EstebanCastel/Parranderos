@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Editar Reserva</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Editar Reserva</h1>
+        
+        <form th:action="@{'/editarReserva/' + ${reserva.id} + '/save'}" th:object="${reserva}" method="post">
+            <!-- Campo Fecha Llegada -->
+            <div class="form-group">
+                <label>Fecha Llegada</label>
+                <input type="date" th:field="*{fechaLlegada}" class="form-control" required>
+            </div>
+            
+            <!-- Campo Fecha Salida -->
+            <div class="form-group">
+                <label>Fecha Salida</label>
+                <input type="date" th:field="*{fechaSalida}" class="form-control" required>
+            </div>
+            
+            <!-- Campo Cantidad Personas -->
+            <div class="form-group">
+                <label>Cantidad Personas</label>
+                <input type="number" th:field="*{cantidadPersonas}" class="form-control" required>
+            </div>
+            
+            <!-- Dropdown para seleccionar Hotel -->
+            <div class="form-group">
+                <label>Hotel</label>
+                <select th:field="*{hotel}" class="form-control">
+                    <option th:each="hotel : ${hoteles}" th:value="${hotel.id}" th:text="${hotel.id}"></option>
+                </select>
+            </div>
+            
+            <!-- Dropdown para seleccionar Plan de Consumo -->
+            <div class="form-group">
+                <label>Plan de Consumo</label>
+                <select th:field="*{planConsumo}" class="form-control">
+                    <option th:each="plan : ${planesConsumo}" th:value="${plan.id}" th:text="${plan.info}" th:selected="${plan.id == reserva.planConsumo.id}"></option>
+                </select>
+            </div>
+
+            <!-- Botones de Guardar y Cancelar -->
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a th:href="@{/reservas}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>

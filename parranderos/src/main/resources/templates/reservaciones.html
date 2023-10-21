@@ -20,8 +20,7 @@
                     <th>Fecha Salida</th>
                     <th>Cantidad Personas</th>
                     <th>ID Hotel</th>
-                    <th>ID Plan Consumo</th>
-                    <th>ID Estadía</th>
+                    <th>Nombre Plan Consumo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -33,11 +32,13 @@
                         <td th:text="${reserva.fechaSalida}"></td>
                         <td th:text="${reserva.cantidadPersonas}"></td>
                         <td th:text="${reserva.hotel.id}"></td>
-                        <td th:text="${reserva.planConsumo.id}"></td>
-                        <td th:text="${reserva.estadia.id}"></td>
+                        <td th:text="${reserva.planConsumo.info}"></td>
                         <td>
                             <a th:href="@{'/editarReserva/' + ${reserva.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <a th:href="@{'/eliminarReserva/' + ${reserva.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <!-- Formulario para eliminar -->
+                            <form th:action="@{'/eliminarReserva/' + ${reserva.id}}" method="post" style="display:inline;">
+                                <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
+                            </form>
                         </td>
                     </tr>
                 </th:block>
@@ -49,6 +50,7 @@
             </br>
         </div>
         <br />
+    </div>
 </body>
 
 </html>

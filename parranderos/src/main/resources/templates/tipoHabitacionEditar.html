@@ -12,31 +12,22 @@
     <div class="container">
         <h1 class="text-center">Editar Tipo de Habitación</h1>
         
+        <!-- La acción del formulario apunta a la ruta correcta para actualizar el tipo de habitación -->
         <form th:action="@{'/editartipohabitacion/' + ${tipohabitacion.id} + '/save'}" th:object="${tipohabitacion}" method="post">
             <div class="form-group">
-                <label>ID</label>
-                <input type="number" th:field="*{id}" class="form-control" readonly>
-            </div>
-            <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" th:field="*{nombre}" class="form-control" required>
+                <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre del tipo de habitación" required>
             </div>
             <div class="form-group">
                 <label>Capacidad</label>
-                <input type="text" th:field="*{capacidad}" class="form-control" required>
+                <input type="text" th:field="*{capacidad}" class="form-control" placeholder="Capacidad de la habitación" required>
             </div>
             <div class="form-group">
                 <label>Dotación</label>
-                <input type="text" th:field="*{dotacion}" class="form-control" required>
+                <input type="text" th:field="*{dotacion}" class="form-control" placeholder="Dotación de la habitación" required>
             </div>
-            <div class="form-group">
-                <label>Habitación</label>
-                <select th:field="*{habitacion.id}" class="form-control">
-                    <option value="">Selecciona una habitación</option>
-                    <option th:each="habitacion : ${habitaciones}" th:value="${habitacion.id}" th:text="${habitacion.id}"></option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Actualizar</button>
+            
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             <a th:href="@{/tiposhabitaciones}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>

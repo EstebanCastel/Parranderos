@@ -9,7 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.sql.Date;
 import java.util.List;
@@ -48,9 +47,6 @@ public class Reserva {
 
     @ManyToMany
     private List<Habitacion> habitaciones;
-
-    @OneToOne(mappedBy="reserva")
-    private Estadia estadia;
 
     public Reserva() {;}
 }

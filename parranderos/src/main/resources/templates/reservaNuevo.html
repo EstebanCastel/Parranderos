@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crear Reserva</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Crear Reserva</h1>
+        
+        <form th:action="@{/crearreserva/save}" th:object="${reserva}" method="post">
+            <!-- Campo ID -->
+            <div class="form-group">
+                <label>ID</label>
+                <input type="text" th:field="*{id}" class="form-control" required>
+            </div>
+
+            <!-- Campo Fecha Llegada -->
+            <div class="form-group">
+                <label>Fecha Llegada</label>
+                <input type="date" th:field="*{fechaLlegada}" class="form-control" required>
+            </div>
+            
+            <!-- Campo Fecha Salida -->
+            <div class="form-group">
+                <label>Fecha Salida</label>
+                <input type="date" th:field="*{fechaSalida}" class="form-control" required>
+            </div>
+            
+            <!-- Campo Cantidad Personas -->
+            <div class="form-group">
+                <label>Cantidad Personas</label>
+                <input type="number" th:field="*{cantidadPersonas}" class="form-control" required>
+            </div>
+            
+            <!-- Dropdown para Hotel -->
+            <div class="form-group">
+                <label>Hotel</label>
+                <select th:field="*{hotel.id}" class="form-control">
+                    <option th:each="hotel : ${hoteles}" th:value="${hotel.id}" th:text="${hotel.id}"></option>
+                </select>
+            </div>
+
+            <!-- Dropdown para Plan de Consumo -->
+            <div class="form-group">
+                <label>Plan Consumo</label>
+                <select th:field="*{planConsumo.id}" class="form-control">
+                    <option th:each="planConsumo : ${planesConsumo}" th:value="${planConsumo.id}" th:text="${planConsumo.info}"></option>
+                </select>
+            </div>
+
+
+            <!-- Botones de Guardar y Cancelar -->
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a th:href="@{/reservas}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>
