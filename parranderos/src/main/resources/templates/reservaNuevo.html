@@ -53,6 +53,21 @@
                 </select>
             </div>
 
+            <!-- Dropdown para Tipo de Habitación -->
+            <div class="form-group">
+                <label>Tipo Habitación</label>
+                <select th:field="*{tipoHabitacion.id}" class="form-control">
+                    <option th:each="tipoHabitacion : ${tipoHabitaciones}" th:value="${tipoHabitacion.id}" th:text="${tipoHabitacion.nombre}"></option>
+                </select>
+            </div>
+
+            <!-- Dropdown para Cédula del Titular -->
+            <div class="form-group">
+                <label>Cédula Titular</label>
+                <select th:field="*{titular.cedula}" class="form-control">
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.cedula}" th:text="${cliente.cedula}"></option>
+                </select>
+            </div>
 
             <!-- Botones de Guardar y Cancelar -->
             <button type="submit" class="btn btn-primary">Guardar</button>
