@@ -50,6 +50,25 @@ public class TipoHabitacionController {
         return "tipoHabitacionNuevo";
     }
 
+    @GetMapping("/editartipohabitacion/{id}")
+    public String editarTipoHabitacion(@PathVariable("id") Integer id, Model model) {
+        // Buscar el tipo de habitación por ID
+        TipoHabitacion tipoHabitacion = tipoHabitacionRepository.findById(id).orElse(null);
+        
+        if (tipoHabitacion == null) {
+            // Aquí puedes manejar el caso en que el tipo de habitación no se encuentra en la base de datos.
+            // Por ejemplo, puedes registrar un error o redirigir al usuario a una página de error.
+            return "redirect:/tiposhabitaciones"; // Por ejemplo, redirige al usuario de vuelta a la lista si no se encuentra el tipo de habitación.
+        }
+        
+        // Agregar el tipo de habitación al modelo
+        model.addAttribute("tipohabitacion", tipoHabitacion);
+        
+        // Devolver la vista de edición
+        return "editarTipoHabitacion"; // Asegúrate de que esta sea el nombre correcto de tu vista de edición.
+    }
+
+
     @PostMapping("/editartipohabitacion/{id}/save")
     public String tipoHabitacionActualizar(@PathVariable("id") Integer id, @ModelAttribute TipoHabitacion tipoHabitacion) {
         // Aquí buscas el tipo de habitación en la base de datos por su ID
