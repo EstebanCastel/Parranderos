@@ -31,6 +31,10 @@ public class Estadia {
     @Column(name="CHECKOUT")
     private Date checkout;
 
+    
+    private Boolean checkinRealizado;
+    private Boolean checkoutRealizado;
+    
 
     @OneToOne
     @JoinColumn(name="reserva_id", referencedColumnName = "id")

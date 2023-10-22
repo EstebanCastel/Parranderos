@@ -43,6 +43,7 @@ public class EstadiaController {
     @PostMapping("/crearestadia/save")
     public String estadiaGuardar(@ModelAttribute Estadia estadia) {
         estadiaRepository.insertarEstadia(estadia.getId(), estadia.getReserva().getId(), estadia.getCuentaConsumo().getId(), estadia.getPazYsalvo(), estadia.getCheckin(), estadia.getCheckout());
+        // No necesitamos pasar checkin_realizado y checkout_realizado porque por defecto son 0 (no realizado).
         return "redirect:/estadias";
     }
 
@@ -61,7 +62,7 @@ public class EstadiaController {
 
     @PostMapping("/editarestadia/{id}/save")
     public String estadiaEditarGuardar(@PathVariable("id") Long id, @ModelAttribute Estadia estadia) {
-        estadiaRepository.actualizarEstadia(id, estadia.getReserva().getId(), estadia.getCuentaConsumo().getId(), estadia.getPazYsalvo(), estadia.getCheckin(), estadia.getCheckout());
+        estadiaRepository.actualizarEstadia(id, estadia.getReserva().getId(), estadia.getCuentaConsumo().getId(), estadia.getPazYsalvo(), estadia.getCheckin(), estadia.getCheckout(), estadia.getCheckinRealizado() ? 1 : 0, estadia.getCheckoutRealizado() ? 1 : 0);
         return "redirect:/estadias";
     }
 

@@ -20,7 +20,9 @@
                     <th>Cuenta Consumo ID</th>
                     <th>Paz y Salvo</th>
                     <th>Checkin</th>
+                    <th>Checkin Realizado</th>
                     <th>Checkout</th>
+                    <th>Checkout Realizado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -32,7 +34,19 @@
                         <td th:text="${estadia.cuentaConsumo.id}"></td>
                         <td th:text="${estadia.pazYsalvo} ? 'Sí' : 'No'"></td>
                         <td th:text="${estadia.checkin}"></td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="checkinRealizado${estadia.id}" th:checked="${estadia.checkinRealizado}" disabled>
+                                <label class="custom-control-label" for="checkinRealizado${estadia.id}"></label>
+                            </div>
+                        </td>
                         <td th:text="${estadia.checkout}"></td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="checkoutRealizado${estadia.id}" th:checked="${estadia.checkoutRealizado}" disabled>
+                                <label class="custom-control-label" for="checkoutRealizado${estadia.id}"></label>
+                            </div>
+                        </td>
                         <td>
                             <a th:href="@{'/editarestadia/' + ${estadia.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <a th:href="@{'/eliminarestadia/' + ${estadia.id}}" class="btn btn-danger btn-sm">Eliminar</a>
