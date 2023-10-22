@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crear Nueva Estadia</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Crear Nueva Estadia</h1>
+
+        <form th:action="@{/crearestadia/save}" th:object="${estadia}" method="post">
+            <div class="form-group">
+                <label>Reserva ID</label>
+                <input type="number" th:field="*{reserva.id}" class="form-control" placeholder="ID de la reserva" required>
+            </div>
+            <div class="form-group">
+                <label>Cuenta Consumo ID</label>
+                <input type="number" th:field="*{cuentaConsumo.id}" class="form-control" placeholder="ID de la cuenta de consumo" required>
+            </div>
+            <div class="form-group">
+                <label>Paz y Salvo</label>
+                <select th:field="*{pazYsalvo}" class="form-control">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Checkin</label>
+                <input type="date" th:field="*{checkin}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Checkout</label>
+                <input type="date" th:field="*{checkout}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a th:href="@{/estadias}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>
