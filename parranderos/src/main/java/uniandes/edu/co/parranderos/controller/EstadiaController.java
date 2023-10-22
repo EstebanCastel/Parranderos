@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import uniandes.edu.co.parranderos.modelo.Estadia;
 import uniandes.edu.co.parranderos.repositorio.EstadiaRepository;
+import uniandes.edu.co.parranderos.repositorio.ReservaRepository;
+import uniandes.edu.co.parranderos.repositorio.CuentaConsumoRepository;
 
 @Controller
 public class EstadiaController {
@@ -18,16 +20,24 @@ public class EstadiaController {
     @Autowired
     private EstadiaRepository estadiaRepository;
 
+    @Autowired
+    private ReservaRepository reservaRepository;
+
+    @Autowired
+    private CuentaConsumoRepository cuentaConsumoRepository;
+
     @GetMapping("/estadias")
     public String estadias(Model model) {
         model.addAttribute("estadias", estadiaRepository.darEstadias());
-        return "estadias"; // La vista de lista de estadias que ya has proporcionado
+        return "estadias";
     }
 
     @GetMapping("/crearestadia")
     public String estadiaForm(Model model) {
         model.addAttribute("estadia", new Estadia());
-        return "estadiaNueva"; // El nuevo archivo HTML que crearemos a continuación
+        model.addAttribute("reservaciones", reservaRepository.darReservaciones());
+        model.addAttribute("consumos", cuentaConsumoRepository.darConsumos());
+        return "estadiaNueva";
     }
 
     @PostMapping("/crearestadia/save")
@@ -41,7 +51,9 @@ public class EstadiaController {
         Estadia estadia = estadiaRepository.findById(id).orElse(null);
         if (estadia != null) {
             model.addAttribute("estadia", estadia);
-            return "estadiaEditar"; // El nuevo archivo HTML que crearemos a continuación
+            model.addAttribute("reservaciones", reservaRepository.darReservaciones());
+            model.addAttribute("consumos", cuentaConsumoRepository.darConsumos());
+            return "estadiaEditar";
         } else {
             return "redirect:/estadias";
         }
