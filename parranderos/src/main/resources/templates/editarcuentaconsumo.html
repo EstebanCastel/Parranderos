@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Plan de Consumo</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Editar Plan de Consumo</h1>
+        
+        <form th:action="@{'/editarPlanConsumo/' + ${planconsumo.id} + '/save'}" th:object="${planconsumo}" method="post">
+            <div class="form-group">
+                <label>ID</label>
+                <input type="number" th:field="*{id}" class="form-control" placeholder="ID del plan de consumo" readonly>
+            </div>
+            <div class="form-group">
+                <label>Info</label>
+                <input type="text" th:field="*{info}" class="form-control" placeholder="Información del plan" required>
+            </div>
+            <div class="form-group">
+                <label>Hotel ID</label>
+                <select th:field="*{hotel.id}" class="form-control">
+                    <option th:each="hotel : ${hoteles}" th:value="${hotel.id}" th:text="${hotel.id}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a th:href="@{/planesconsumo}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

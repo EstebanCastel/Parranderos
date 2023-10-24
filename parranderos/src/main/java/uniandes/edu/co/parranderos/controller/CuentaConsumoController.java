@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import java.util.List;
 import uniandes.edu.co.parranderos.modelo.CuentaConsumo;
+import uniandes.edu.co.parranderos.modelo.Habitacion;
 import uniandes.edu.co.parranderos.repositorio.CuentaConsumoRepository;
+import uniandes.edu.co.parranderos.repositorio.HabitacionRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,9 @@ public class CuentaConsumoController {
 
     @Autowired
     private CuentaConsumoRepository cuentaConsumoRepository;
+
+    @Autowired
+    private HabitacionRepository habitacionRepository;
 
     @GetMapping("/cuentasconsumo")
     public String cuentasConsumo(Model model) {
@@ -36,10 +41,21 @@ public class CuentaConsumoController {
         return "cuentasconsumo";
     }
 
+    @GetMapping("/crearcuenta")
+    public String crearCuentaForm(Model model) {
+        model.addAttribute("cuenta", new CuentaConsumo());
+        
+        // Obteniendo la lista de habitaciones
+        List<Habitacion> habitaciones = habitacionRepository.findAll(); // Asume que tienes un método 'findAll' en tu repositorio
+        model.addAttribute("habitaciones", habitaciones);
+        
+        return "crearCuentaConsumo";
+    }
+
     @PostMapping("/crearcuenta/save")
     public String cuentaConsumoGuardar(@ModelAttribute CuentaConsumo cuenta) {
         try {
-            cuentaConsumoRepository.insertarCuentaConsumo(cuenta.getId(), cuenta.getCostoTotal(), cuenta.getEstadia().getId());
+            cuentaConsumoRepository.insertarCuentaConsumo(cuenta.getId(), cuenta.getCostoTotal(), cuenta.getEstadia().getId(), cuenta.getHabitacion());
         } catch (Exception e) {
             // Aquí puedes manejar cualquier error que pueda ocurrir al guardar la cuenta de consumo.
             // Por ejemplo, puedes registrar el error y/o redirigir al usuario a una página de error.

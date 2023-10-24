@@ -22,13 +22,14 @@ public interface CuentaConsumoRepository extends JpaRepository<CuentaConsumo, Lo
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO cuentasconsumo (ID, COSTOTOTAL, ESTADIA_ID) VALUES (:id, :costoTotal, :estadiaId)", nativeQuery = true)
-    void insertarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Double costoTotal, @Param("estadiaId") Long estadiaId);
+    @Query(value = "INSERT INTO cuentasconsumo (ID, COSTOTOTAL, ESTADIA_ID, HABITACION) VALUES (:id, :costoTotal, :estadiaId, :habitacionId)", nativeQuery = true)
+    void insertarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal, @Param("estadiaId") Long estadiaId, @Param("habitacionId") Integer habitacionId);
 
+        
     @Modifying
     @Transactional
     @Query(value = "UPDATE cuentasconsumo SET COSTOTOTAL = :costoTotal, ESTADIA_ID = :estadiaId WHERE ID = :id", nativeQuery = true)
-    void actualizarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Double costoTotal, @Param("estadiaId") Long estadiaId);
+    void actualizarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float float1, @Param("estadiaId") Long estadiaId);
 
     @Modifying
     @Transactional
