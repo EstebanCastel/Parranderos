@@ -53,8 +53,9 @@ public class Reserva {
     @OneToMany(mappedBy="reserva")
     private List<Cliente> acompañantes;
 
-    @ManyToMany
-    private List<Habitacion> habitaciones;
+    @ManyToOne
+    @JoinColumn(name="habitacion_id", referencedColumnName = "id")
+    private Habitacion habitacion;
 
     public Reserva() {;}
 

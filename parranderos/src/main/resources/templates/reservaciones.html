@@ -22,6 +22,7 @@
                     <th>ID Hotel</th>
                     <th>Nombre Plan Consumo</th>
                     <th>Tipo Habitación</th> <!-- Añadido -->
+                    <th>Habitación</th>
                     <th>Cédula Titular</th> <!-- Añadido -->
                     <th>Acciones</th>
                 </tr>
@@ -36,6 +37,7 @@
                         <td th:text="${reserva.hotel.id}"></td>
                         <td th:text="${reserva.planConsumo.info}"></td>
                         <td th:text="${reserva.tipoHabitacion.nombre}"></td> <!-- Añadido -->
+                        <td th:text="${reserva.habitacion.id}"></td> 
                         <td th:text="${reserva.titular.cedula}"></td> <!-- Añadido -->
                         <td>
                             <a th:href="@{'/editarReserva/' + ${reserva.id}}" class="btn btn-warning btn-sm">Editar</a>

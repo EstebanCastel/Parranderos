@@ -55,6 +55,13 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label>Habitación ID</label>
+                <select th:field="*{habitacion.id}" class="form-control">
+                    <option th:each="habitacion : ${habitaciones}" th:value="${habitacion.id}" th:text="${habitacion.id}" th:selected="${habitacion.id == reserva.habitacion.id}"></option>
+                </select>
+            </div>
+
             <!-- Dropdown para Cédula del Titular -->
             <div class="form-group">
                 <label>Cédula Titular</label>

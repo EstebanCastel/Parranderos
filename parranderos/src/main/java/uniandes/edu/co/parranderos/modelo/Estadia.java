@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +36,9 @@ public class Estadia {
     private Boolean checkinRealizado;
     private Boolean checkoutRealizado;
     
+    @ManyToOne
+    @JoinColumn(name="habitacion_id", referencedColumnName = "id")
+    private Habitacion habitacion;
 
     @OneToOne
     @JoinColumn(name="reserva_id", referencedColumnName = "id")
