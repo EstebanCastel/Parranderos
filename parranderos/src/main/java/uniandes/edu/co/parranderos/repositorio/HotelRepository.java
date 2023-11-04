@@ -53,4 +53,59 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
            nativeQuery = true)
     List<Long> obtenerBuenosClientes();
 
+    @Query(value = "WITH Weeks AS (" +
+                   "SELECT TRUNC(FECHADELCONSUMO, 'IW') AS inicioSemana," +
+                   "TRUNC(FECHADELCONSUMO, 'IW') + 6 AS finSemana," +
+                   "SERVICIO," +
+                   "COUNT(*) AS consumo " +
+                   "FROM cuentasconsumo " +
+                   "GROUP BY TRUNC(FECHADELCONSUMO, 'IW'), SERVICIO)," +
+                   "MaxMin AS (" +
+                   "SELECT inicioSemana," +
+                   "finSemana," +
+                   "SERVICIO," +
+                   "consumo," +
+                   "ROW_NUMBER() OVER(PARTITION BY inicioSemana ORDER BY consumo DESC) AS rn_max," +
+                   "ROW_NUMBER() OVER(PARTITION BY inicioSemana ORDER BY consumo ASC) AS rn_min " +
+                   "FROM Weeks) " +
+                   "SELECT inicioSemana," +
+                   "finSemana," +
+                   "MAX(CASE WHEN rn_max = 1 THEN consumo END) AS ConsumoMax," +
+                   "MAX(CASE WHEN rn_max = 1 THEN SERVICIO END) AS TipoConsumoMax," +
+                   "MIN(CASE WHEN rn_min = 1 THEN consumo END) AS ConsumoMin," +
+                   "MIN(CASE WHEN rn_min = 1 THEN SERVICIO END) AS TipoConsumoMin " +
+                   "FROM MaxMin " +
+                   "GROUP BY inicioSemana, finSemana " +
+                   "ORDER BY inicioSemana", 
+           nativeQuery = true)
+    List<Object[]> obtenerConsumoMaxMinPorSemana();
+
+    @Query(value = "WITH Weeks AS (" +
+                   "SELECT TRUNC(FECHALLEGADA, 'IW') AS inicioSemana," +
+                   "TRUNC(FECHALLEGADA, 'IW') + 6 AS finSemana," +
+                   "TIPOHABITACION_ID," +
+                   "COUNT(*) AS reservas " +
+                   "FROM reservaciones " +
+                   "GROUP BY TRUNC(FECHALLEGADA, 'IW'), TIPOHABITACION_ID)," +
+                   "MaxMin AS (" +
+                   "SELECT inicioSemana," +
+                   "finSemana," +
+                   "TIPOHABITACION_ID," +
+                   "reservas," +
+                   "ROW_NUMBER() OVER(PARTITION BY inicioSemana ORDER BY reservas DESC) AS rn_max," +
+                   "ROW_NUMBER() OVER(PARTITION BY inicioSemana ORDER BY reservas ASC) AS rn_min " +
+                   "FROM Weeks) " +
+                   "SELECT m.inicioSemana," +
+                   "m.finSemana," +
+                   "MAX(CASE WHEN m.rn_max = 1 THEN m.reservas END) AS HabitacionMax," +
+                   "MAX(CASE WHEN m.rn_max = 1 THEN t.NOMBRE END) AS TipoMax," +
+                   "MIN(CASE WHEN m.rn_min = 1 THEN m.reservas END) AS HabitacionMin," +
+                   "MIN(CASE WHEN m.rn_min = 1 THEN t.NOMBRE END) AS TipoMin " +
+                   "FROM MaxMin m " +
+                   "JOIN tipohabitaciones t ON m.TIPOHABITACION_ID = t.ID " +
+                   "GROUP BY m.inicioSemana, m.finSemana " +
+                   "ORDER BY m.inicioSemana", 
+           nativeQuery = true)
+    List<Object[]> obtenerHabitacionMaxMinPorSemana();
+
 }

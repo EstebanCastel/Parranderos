@@ -38,4 +38,15 @@ public class HotelController {
         
         return "buenosClientes";
     }
+
+    @GetMapping("/resumenFuncionamiento")
+    public String resumenFuncionamiento(Model model) {
+        List<Object[]> consumoMaxMin = hotelRepository.obtenerConsumoMaxMinPorSemana();
+        List<Object[]> habitacionMaxMin = hotelRepository.obtenerHabitacionMaxMinPorSemana();
+
+        model.addAttribute("consumoMaxMin", consumoMaxMin);
+        model.addAttribute("habitacionMaxMin", habitacionMaxMin);
+
+        return "resumenFuncionamiento";
+    }
 }
