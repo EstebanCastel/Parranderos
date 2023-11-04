@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Consumo por Usuario y Fecha</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Consumo por Usuario y Fecha</h1>
+
+        <!-- Formulario para ingreso de datos -->
+        <form th:action="@{/consumoUsuarioYFecha}" method="get">
+            <div class="form-group">
+                <label for="cedulaUsuario">Cédula del Usuario:</label>
+                <input type="number" class="form-control" id="cedulaUsuario" name="cedulaUsuario" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaInicio">Fecha de Inicio:</label>
+                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaFin">Fecha Final:</label>
+                <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Consultar</button>
+        </form>
+
+        <br>
+
+        <!-- Tabla para mostrar resultados -->
+        <table class="table table-condensed table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Fecha del Consumo</th>
+                    <th>Costo Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="resultado : ${resultados}">
+                    <tr>
+                        <td th:text="${resultado[0]}"></td>
+                        <td th:text="${resultado[1]}"></td>
+                        <td th:text="${resultado[2]}"></td>
+                        <td th:text="${resultado[3]}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <a th:href="@{/cuentasconsumo}" class="btn btn-primary">Volver a Cuentas de Consumo</a>
+        </div>
+    </div>
+</body>
+
+</html>

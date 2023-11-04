@@ -14,7 +14,9 @@
         
         <!-- Botón para ir al requerimiento 1 -->
         <a th:href="@{/dineroRecolectado}" class="btn btn-info mb-3">REQ 1: Dinero Recolectado</a>
-        
+        <a th:href="@{/mostrarFormularioConsumo}" class="btn btn-info mb-3">REQ 3: Consumo Usuario y Fecha</a>
+
+
         <!-- Bloque para mostrar mensajes de error -->
         <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
             <p th:text="${errorMessage}"></p>

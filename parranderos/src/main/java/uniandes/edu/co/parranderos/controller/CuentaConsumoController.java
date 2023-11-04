@@ -69,10 +69,18 @@ public class CuentaConsumoController {
         return "dineroRecolectado";
     }
     
-    @GetMapping("/consumoPorUsuarioYFecha")
+    @GetMapping("/consumoUsuarioYFecha")
     public String obtenerConsumoPorUsuarioYFecha(@RequestParam("cedulaUsuario") Long cedulaUsuario, @RequestParam("fechaInicio") Date fechaInicio, @RequestParam("fechaFin") Date fechaFin, Model model) {
         List<Object[]> resultados = cuentaConsumoRepository.obtenerConsumoPorUsuarioYFecha(cedulaUsuario, fechaInicio, fechaFin);
         model.addAttribute("resultados", resultados);
-        return "consumoPorUsuarioYFecha";
+        return "consumoUsuarioYFecha";
     }
+
+    @GetMapping("/mostrarFormularioConsumo")
+    public String mostrarFormularioConsumo() {
+        return "consumoUsuarioYFecha";
+    }
+
+
+    
 }
