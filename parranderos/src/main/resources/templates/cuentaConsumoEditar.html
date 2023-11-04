@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Editar Cuenta de Consumo</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Editar Cuenta de Consumo</h1>
+
+        <form th:action="@{'/editarCuentaConsumo/' + ${cuentaConsumo.id} + '/save'}" th:object="${cuentaConsumo}" method="post">
+            <!-- Campo de entrada para ID (oculto ya que el usuario no debería cambiarlo) -->
+            <input type="hidden" th:field="*{id}">
+            
+            <div class="form-group">
+                <label>Costo Total</label>
+                <input type="text" th:field="*{costoTotal}" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Habitación</label>
+                <input type="number" th:field="*{habitacion}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a th:href="@{/cuentasconsumo}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -17,22 +17,19 @@ public interface CuentaConsumoRepository extends JpaRepository<CuentaConsumo, Lo
     @Query(value = "SELECT * FROM cuentasconsumo", nativeQuery = true)
     Collection<CuentaConsumo> darConsumos();
 
-    @Query(value = "SELECT r.HABITACION_ID FROM reservaciones r JOIN estadias e ON r.ID = e.RESERVA_ID WHERE e.ID = :estadiaId", nativeQuery = true)
-    Long findHabitacionByEstadiaId(Long estadiaId);
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO cuentasconsumo (ID, COSTOTOTAL, HABITACION) VALUES (:id, :costoTotal, :habitacionId)", nativeQuery = true)
+    void insertarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal, @Param("habitacionId") Integer habitacionId);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO cuentasconsumo (ID, COSTOTOTAL, ESTADIA_ID, HABITACION) VALUES (:id, :costoTotal, :estadiaId, :habitacionId)", nativeQuery = true)
-    void insertarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal, @Param("estadiaId") Long estadiaId, @Param("habitacionId") Integer habitacionId);
-
-        
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE cuentasconsumo SET COSTOTOTAL = :costoTotal, ESTADIA_ID = :estadiaId WHERE ID = :id", nativeQuery = true)
-    void actualizarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float float1, @Param("estadiaId") Long estadiaId);
+    @Query(value = "UPDATE cuentasconsumo SET COSTOTOTAL = :costoTotal WHERE ID = :id", nativeQuery = true)
+    void actualizarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal);
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM cuentasconsumo WHERE ID = :id", nativeQuery = true)
     void eliminarCuentaConsumo(@Param("id") Long id);
 }
+

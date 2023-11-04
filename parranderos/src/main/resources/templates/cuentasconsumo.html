@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Cuentas de Consumo</title>
+    <title>Lista de Cuentas de Consumo</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
     <script th:src="@{/css/jquery.min.js}"></script>
     <script th:src="@{/css/bootstrap.min.js}"></script>
@@ -10,7 +10,12 @@
 
 <body>
     <div class="text-center">
-        <h1>Cuentas de Consumo</h1>
+        <h1>Lista de Cuentas de Consumo</h1>
+        
+        <!-- Bloque para mostrar mensajes de error -->
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+            <p th:text="${errorMessage}"></p>
+        </div>
 
         <table class="table table-condensed table-hover table-bordered" style="border-collapse:collapse;">
             <thead class="thead-dark">
@@ -22,23 +27,22 @@
                 </tr>
             </thead>
             <tbody>
-                <th:block th:each="cuenta : ${cuentasconsumo}">
+                <th:block th:each="cuentaConsumo : ${cuentasconsumo}">
                     <tr>
-                        <td th:text="${cuenta.id}"></td>
-                        <td th:text="${cuenta.costoTotal}"></td>
-                        <td th:text="${cuenta.habitacion}"></td>
+                        <td th:text="${cuentaConsumo.id}"></td>
+                        <td th:text="${cuentaConsumo.costoTotal}"></td>
+                        <td th:text="${cuentaConsumo.habitacion}"></td>
                         <td>
-                            <a th:href="@{'/editarcuenta/' + ${cuenta.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <a th:href="@{'/eliminarcuenta/' + ${cuenta.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a th:href="@{'/editarCuentaConsumo/' + ${cuentaConsumo.id}}" class="btn btn-warning btn-sm">Editar</a>
+                            <a th:href="@{'/eliminarCuentaConsumo/' + ${cuentaConsumo.id}}" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 </th:block>
             </tbody>
         </table>
         <div class="text-center">
-            <a th:href="@{/}" class="btn btn-primary"> Volver Atrás</a>
-            <a th:href="@{/crearcuenta}" class="btn btn-success">Crear cuenta consumo</a>
-            </br>
+            <a th:href="@{/}" class="btn btn-primary">Volver Atrás</a>
+            <a th:href="@{/crearCuentaConsumo}" class="btn btn-success">Crear Cuenta de Consumo</a>
         </div>
         <br />
     </div>

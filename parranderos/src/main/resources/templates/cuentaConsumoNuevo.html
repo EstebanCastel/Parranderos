@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crear Cuenta de Consumo</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center">Crear Cuenta de Consumo</h2>
+        
+        <form th:action="@{/crearcuentaconsumo/save}" th:object="${cuentaConsumo}" method="post">
+            
+            <div class="form-group">
+                <label>ID</label>
+                <input type="number" th:field="*{id}" class="form-control" required>
+            </div>
+
+            <!-- Campo para Costo Total -->
+            <div class="form-group">
+                <label for="costoTotal">Costo Total:</label>
+                <input type="number" class="form-control" id="costoTotal" th:field="*{costoTotal}" required>
+            </div>
+            
+            <!-- Campo para Habitación -->
+            <div class="form-group">
+                <label for="habitacion">Habitación:</label>
+                <input type="number" class="form-control" id="habitacion" th:field="*{habitacion}" required>
+            </div>
+            
+            
+            <!-- Botones de acción -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a th:href="@{/cuentasconsumo}" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
