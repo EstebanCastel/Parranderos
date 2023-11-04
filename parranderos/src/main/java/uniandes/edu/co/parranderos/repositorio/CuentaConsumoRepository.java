@@ -21,13 +21,13 @@ public interface CuentaConsumoRepository extends JpaRepository<CuentaConsumo, Lo
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO cuentasconsumo (ID, COSTOTOTAL, HABITACION, FECHADELCONSUMO, CLIENTE) VALUES (:id, :costoTotal, :habitacionId, :fechaDelConsumo, :clienteId)", nativeQuery = true)
-    void insertarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal, @Param("habitacionId") Integer habitacionId, @Param("fechaDelConsumo") Date fechaDelConsumo, @Param("clienteId") Long clienteId);
+    @Query(value = "INSERT INTO cuentasconsumo (ID, COSTOTOTAL, HABITACION, FECHADELCONSUMO, CLIENTE, SERVICIO) VALUES (:id, :costoTotal, :habitacionId, :fechaDelConsumo, :clienteId, :servicio)", nativeQuery = true)
+    void insertarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal, @Param("habitacionId") Integer habitacionId, @Param("fechaDelConsumo") Date fechaDelConsumo, @Param("clienteId") Long clienteId, @Param("servicio") String servicio);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE cuentasconsumo SET COSTOTOTAL = :costoTotal, FECHADELCONSUMO = :fechaDelConsumo, CLIENTE = :clienteId WHERE ID = :id", nativeQuery = true)
-    void actualizarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal, @Param("fechaDelConsumo") Date fechaDelConsumo, @Param("clienteId") Long clienteId);
+    @Query(value = "UPDATE cuentasconsumo SET COSTOTOTAL = :costoTotal, FECHADELCONSUMO = :fechaDelConsumo, CLIENTE = :clienteId, SERVICIO = :servicio WHERE ID = :id", nativeQuery = true)
+    void actualizarCuentaConsumo(@Param("id") Long id, @Param("costoTotal") Float costoTotal, @Param("fechaDelConsumo") Date fechaDelConsumo, @Param("clienteId") Long clienteId, @Param("servicio") String servicio);
 
     @Modifying
     @Transactional
@@ -39,4 +39,8 @@ public interface CuentaConsumoRepository extends JpaRepository<CuentaConsumo, Lo
 
     @Query(value = "SELECT c.CLIENTE, cl.NOMBRE, c.FECHADELCONSUMO, c.COSTOTOTAL FROM cuentasconsumo c JOIN Clientes cl ON c.CLIENTE = cl.CEDULA WHERE c.CLIENTE = :cedulaUsuario AND c.FECHADELCONSUMO BETWEEN :fechaInicio AND :fechaFin ORDER BY c.FECHADELCONSUMO", nativeQuery = true)
     List<Object[]> obtenerConsumoPorUsuarioYFecha(@Param("cedulaUsuario") Long cedulaUsuario, @Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
+
+    @Query(value = "SELECT CLIENTE, SERVICIO, COUNT(*) AS NUMERO_DE_VECES FROM cuentasconsumo WHERE SERVICIO = :servicioSeleccionado AND FECHADELCONSUMO BETWEEN :fechaInicio AND :fechaFin GROUP BY CLIENTE, SERVICIO ORDER BY NUMERO_DE_VECES DESC", nativeQuery = true)
+    List<Object[]> obtenerClientesPorServicioYFecha(@Param("servicioSeleccionado") String servicioSeleccionado, @Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
+
 }

@@ -37,6 +37,9 @@ public class CuentaConsumo {
     @JoinColumn(name="CLIENTE", referencedColumnName = "CEDULA")
     private Cliente cliente;
     
+    @Column(name = "Servicio")
+    private String servicio;
+    
     @OneToMany(mappedBy="cuentaConsumo")
     private List<Producto> productos;
 

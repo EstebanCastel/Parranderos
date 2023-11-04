@@ -41,6 +41,16 @@
                 <label for="clienteCedula">Cédula del Cliente:</label>
                 <input type="number" class="form-control" id="clienteCedula" th:field="*{cliente.cedula}" required>
             </div>
+
+            <div class="form-group">
+                <label for="servicio">Servicio:</label>
+                <select class="form-control" id="servicio" th:field="*{servicio}" required>
+                    <option value="Spa">Spa</option>
+                    <option value="Sala">Sala</option>
+                    <option value="Extra">Extra</option>
+                    <option value="Producto">Producto</option>
+                </select>
+            </div>
             
             <!-- Botones de acción -->
             <div class="form-group">

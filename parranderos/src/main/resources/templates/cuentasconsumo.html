@@ -15,7 +15,7 @@
         <!-- Botón para ir al requerimiento 1 -->
         <a th:href="@{/dineroRecolectado}" class="btn btn-info mb-3">REQ 1: Dinero Recolectado</a>
         <a th:href="@{/mostrarFormularioConsumo}" class="btn btn-info mb-3">REQ 5: Consumo Usuario y Fecha</a>
-
+        <a th:href="@{/mostrarFormularioConsumo2}" class="btn btn-info mb-3">REQ 9: Consultar Consumo</a>
 
         <!-- Bloque para mostrar mensajes de error -->
         <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
@@ -30,6 +30,7 @@
                     <th>Habitación</th>
                     <th>Fecha del Consumo</th>
                     <th>Cliente</th>
+                    <th>Servicio</th> <!-- Nueva cabecera para Servicio -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -41,6 +42,7 @@
                         <td th:text="${cuentaConsumo.habitacion}"></td>
                         <td th:text="${cuentaConsumo.fechaDelConsumo}"></td>
                         <td th:text="${cuentaConsumo.cliente.cedula} + ' - ' + ${cuentaConsumo.cliente.nombre}"></td>
+                        <td th:text="${cuentaConsumo.servicio}"></td> <!-- Nueva celda para mostrar el Servicio -->
                         <td>
                             <a th:href="@{'/editarCuentaConsumo/' + ${cuentaConsumo.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <a th:href="@{'/eliminarCuentaConsumo/' + ${cuentaConsumo.id}}" class="btn btn-danger btn-sm">Eliminar</a>

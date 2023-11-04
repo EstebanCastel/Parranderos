@@ -35,7 +35,7 @@ public class CuentaConsumoController {
 
     @PostMapping("/crearcuentaconsumo/save")
     public String cuentaConsumoGuardar(@ModelAttribute CuentaConsumo cuentaConsumo) {
-        cuentaConsumoRepository.insertarCuentaConsumo(cuentaConsumo.getId(), cuentaConsumo.getCostoTotal(), cuentaConsumo.getHabitacion(), cuentaConsumo.getFechaDelConsumo(), cuentaConsumo.getCliente().getCedula());
+        cuentaConsumoRepository.insertarCuentaConsumo(cuentaConsumo.getId(), cuentaConsumo.getCostoTotal(), cuentaConsumo.getHabitacion(), cuentaConsumo.getFechaDelConsumo(), cuentaConsumo.getCliente().getCedula(), cuentaConsumo.getServicio());
         return "redirect:/cuentasconsumo";
     }
 
@@ -52,7 +52,7 @@ public class CuentaConsumoController {
 
     @PostMapping("/editarCuentaConsumo/{id}/save")
     public String cuentaConsumoEditarGuardar(@PathVariable("id") Long id, @ModelAttribute CuentaConsumo cuentaConsumo) {
-        cuentaConsumoRepository.actualizarCuentaConsumo(id, cuentaConsumo.getCostoTotal(), cuentaConsumo.getFechaDelConsumo(), cuentaConsumo.getCliente().getCedula());
+        cuentaConsumoRepository.actualizarCuentaConsumo(id, cuentaConsumo.getCostoTotal(), cuentaConsumo.getFechaDelConsumo(), cuentaConsumo.getCliente().getCedula(), cuentaConsumo.getServicio());
         return "redirect:/cuentasconsumo";
     }
 
@@ -80,6 +80,19 @@ public class CuentaConsumoController {
     public String mostrarFormularioConsumo() {
         return "consumoUsuarioYFecha";
     }
+
+    @GetMapping("/consumoPorServicioYFecha")
+    public String obtenerClientesPorServicioYFecha(@RequestParam("servicioSeleccionado") String servicioSeleccionado, @RequestParam("fechaInicio") Date fechaInicio, @RequestParam("fechaFin") Date fechaFin, Model model) {
+        List<Object[]> resultados = cuentaConsumoRepository.obtenerClientesPorServicioYFecha(servicioSeleccionado, fechaInicio, fechaFin);
+        model.addAttribute("resultados", resultados);
+        return "consumoPorServicioYFecha";  // Este sería el nombre del archivo HTML que muestra los resultados
+    }
+
+    @GetMapping("/mostrarFormularioConsumo2")
+    public String mostrarFormularioConsumo2() {
+        return "consumoPorServicioYFecha";
+    }
+
 
 
     
