@@ -43,4 +43,18 @@ public interface CuentaConsumoRepository extends JpaRepository<CuentaConsumo, Lo
     @Query(value = "SELECT CLIENTE, SERVICIO, COUNT(*) AS NUMERO_DE_VECES FROM cuentasconsumo WHERE SERVICIO = :servicioSeleccionado AND FECHADELCONSUMO BETWEEN :fechaInicio AND :fechaFin GROUP BY CLIENTE, SERVICIO ORDER BY NUMERO_DE_VECES DESC", nativeQuery = true)
     List<Object[]> obtenerClientesPorServicioYFecha(@Param("servicioSeleccionado") String servicioSeleccionado, @Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
 
+    @Query(value = 
+    "SELECT c.CLIENTE, c.FECHADELCONSUMO, c.SERVICIO " +
+    "FROM cuentasconsumo c " +
+    "WHERE NOT EXISTS (" +
+    "   SELECT 1 " +
+    "   FROM cuentasconsumo cc " +
+    "   WHERE cc.CLIENTE = c.CLIENTE " +
+    "   AND cc.SERVICIO = :servicioSeleccionado " +
+    "   AND cc.FECHADELCONSUMO BETWEEN :fechaInicio AND :fechaFin " +
+    ") " +
+    "GROUP BY c.CLIENTE, c.FECHADELCONSUMO, c.SERVICIO " +
+    "ORDER BY c.CLIENTE, c.FECHADELCONSUMO DESC", nativeQuery = true)
+    List<Object[]> obtenerClientesQueNoConsumieronServicio(@Param("servicioSeleccionado") String servicioSeleccionado, @Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
+
 }

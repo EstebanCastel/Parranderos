@@ -93,6 +93,17 @@ public class CuentaConsumoController {
         return "consumoPorServicioYFecha";
     }
 
+    @GetMapping("/consumoPorServicioYFechaNegado")
+    public String obtenerClientesQueNoConsumieronServicio(@RequestParam("servicioSeleccionado") String servicioSeleccionado, @RequestParam("fechaInicio") Date fechaInicio, @RequestParam("fechaFin") Date fechaFin, Model model) {
+        List<Object[]> resultados = cuentaConsumoRepository.obtenerClientesQueNoConsumieronServicio(servicioSeleccionado, fechaInicio, fechaFin);
+        model.addAttribute("resultados", resultados);
+        return "consumoPorServicioYFechaNegado";  // Este sería el nombre del archivo HTML que muestra los resultados
+    }
+
+    @GetMapping("/mostrarFormularioConsumoNegado")
+    public String mostrarFormularioConsumoNegado() {
+        return "consumoPorServicioYFechaNegado";  // Este sería el nombre del archivo HTML del formulario para ingresar los datos de la consulta
+    }
 
 
     
