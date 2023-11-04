@@ -30,5 +30,12 @@ public class HotelController {
         
         return "resumenHotel";
     }
-}
 
+    @GetMapping("/buenosClientes")
+    public String buenosClientes(Model model) {
+        List<Long> buenosClientes = hotelRepository.obtenerBuenosClientes();
+        model.addAttribute("buenosClientes", buenosClientes);
+        
+        return "buenosClientes";
+    }
+}
