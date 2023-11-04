@@ -24,6 +24,13 @@
                 <label>Habitación</label>
                 <input type="number" th:field="*{habitacion}" class="form-control" required>
             </div>
+
+            <!-- Campo para Fecha del Consumo -->
+            <div class="form-group">
+                <label for="fechaDelConsumo">Fecha del Consumo:</label>
+                <input type="date" class="form-control" id="fechaDelConsumo" th:field="*{fechaDelConsumo}" required>
+            </div>
+
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             <a th:href="@{/cuentasconsumo}" class="btn btn-secondary">Cancelar</a>
         </form>

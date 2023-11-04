@@ -1,5 +1,7 @@
 package uniandes.edu.co.parranderos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,7 @@ public class CuentaConsumoController {
 
     @Autowired
     private CuentaConsumoRepository cuentaConsumoRepository;
-
+    
     @GetMapping("/cuentasconsumo")
     public String cuentasConsumo(Model model) {
         model.addAttribute("cuentasconsumo", cuentaConsumoRepository.darConsumos());
@@ -30,7 +32,8 @@ public class CuentaConsumoController {
 
     @PostMapping("/crearcuentaconsumo/save")
     public String cuentaConsumoGuardar(@ModelAttribute CuentaConsumo cuentaConsumo) {
-        cuentaConsumoRepository.insertarCuentaConsumo(cuentaConsumo.getId(), cuentaConsumo.getCostoTotal(), cuentaConsumo.getHabitacion());
+        // Debes modificar el método del repositorio para aceptar la fecha del consumo si aún no lo has hecho
+        cuentaConsumoRepository.insertarCuentaConsumo(cuentaConsumo.getId(), cuentaConsumo.getCostoTotal(), cuentaConsumo.getHabitacion(), cuentaConsumo.getFechaDelConsumo());
         return "redirect:/cuentasconsumo";
     }
 
@@ -47,7 +50,8 @@ public class CuentaConsumoController {
 
     @PostMapping("/editarCuentaConsumo/{id}/save")
     public String cuentaConsumoEditarGuardar(@PathVariable("id") Long id, @ModelAttribute CuentaConsumo cuentaConsumo) {
-        cuentaConsumoRepository.actualizarCuentaConsumo(id, cuentaConsumo.getCostoTotal());
+        // Debes modificar el método del repositorio para aceptar la fecha del consumo si aún no lo has hecho
+        cuentaConsumoRepository.actualizarCuentaConsumo(id, cuentaConsumo.getCostoTotal(), cuentaConsumo.getFechaDelConsumo());
         return "redirect:/cuentasconsumo";
     }
 
@@ -56,5 +60,13 @@ public class CuentaConsumoController {
         cuentaConsumoRepository.eliminarCuentaConsumo(id);
         return "redirect:/cuentasconsumo";
     }
-}
 
+    @GetMapping("/dineroRecolectado")
+    public String dineroRecolectado(Model model) {
+        List<Object[]> resultados = cuentaConsumoRepository.dineroRecolectadoPorServicios();
+        model.addAttribute("resultados", resultados);
+        return "dineroRecolectado";
+    }
+
+
+}

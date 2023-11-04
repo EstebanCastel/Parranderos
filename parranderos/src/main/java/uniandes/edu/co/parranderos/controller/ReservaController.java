@@ -1,5 +1,7 @@
 package uniandes.edu.co.parranderos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -100,6 +102,13 @@ public class ReservaController {
             return "redirect:/reservas";
         }
         return "redirect:/reservas";
+    }
+
+    @GetMapping("/porcentajeOcupacion")
+    public String porcentajeOcupacion(Model model) {
+        List<Object[]> resultados = reservaRepository.porcentajeOcupacionHabitaciones();
+        model.addAttribute("ocupaciones", resultados);
+        return "porcentajeOcupacion";
     }
 
 }

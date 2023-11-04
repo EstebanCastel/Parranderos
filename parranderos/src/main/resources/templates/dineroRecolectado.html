@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dinero Recolectado</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div class="text-center">
+        <h1>Dinero Recolectado por Habitación</h1>
+
+        <table class="table table-condensed table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Habitación</th>
+                    <th>Dinero Recolectado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="resultado : ${resultados}">
+                    <tr>
+                        <td th:text="${resultado[0]}"></td>
+                        <td th:text="${resultado[1]}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+        
+        <a th:href="@{/cuentasconsumo}" class="btn btn-primary">Volver a Lista de Cuentas de Consumo</a>
+    </div>
+</body>
+</html>

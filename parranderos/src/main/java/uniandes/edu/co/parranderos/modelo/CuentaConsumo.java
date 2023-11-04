@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
+import java.sql.Date;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,9 @@ public class CuentaConsumo {
     @Column(name = "COSTOTOTAL")
     private Float costoTotal;
     private Integer habitacion;
+
+    @Column(name = "FECHADELCONSUMO")  // Mapeando la columna con el atributo
+    private Date fechaDelConsumo;  // Atributo para almacenar la fecha del consumo
 
     @OneToMany(mappedBy="cuentaConsumo")
     private List<Producto> productos;

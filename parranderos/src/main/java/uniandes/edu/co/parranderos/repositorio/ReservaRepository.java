@@ -2,6 +2,7 @@ package uniandes.edu.co.parranderos.repositorio;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -30,4 +31,14 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Transactional
     @Query(value = "DELETE FROM reservaciones WHERE id = :id", nativeQuery = true)
     void eliminarReserva(@Param("id") Long id);
+
+    @Query(value = """
+    SELECT HABITACION_ID, 
+           (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM reservaciones WHERE FECHALLEGADA BETWEEN ADD_MONTHS(SYSDATE, -12) AND SYSDATE)) AS PORCENTAJE_OCUPACION
+    FROM reservaciones 
+    WHERE FECHALLEGADA BETWEEN ADD_MONTHS(SYSDATE, -12) AND SYSDATE 
+    GROUP BY HABITACION_ID
+    """, nativeQuery = true)
+    List<Object[]> porcentajeOcupacionHabitaciones();
+
 }
