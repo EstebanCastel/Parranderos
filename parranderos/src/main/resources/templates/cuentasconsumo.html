@@ -27,6 +27,7 @@
                     <th>Costo Total</th>
                     <th>Habitación</th>
                     <th>Fecha del Consumo</th>
+                    <th>Cliente</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -37,6 +38,7 @@
                         <td th:text="${cuentaConsumo.costoTotal}"></td>
                         <td th:text="${cuentaConsumo.habitacion}"></td>
                         <td th:text="${cuentaConsumo.fechaDelConsumo}"></td>
+                        <td th:text="${cuentaConsumo.cliente.cedula} + ' - ' + ${cuentaConsumo.cliente.nombre}"></td>
                         <td>
                             <a th:href="@{'/editarCuentaConsumo/' + ${cuentaConsumo.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <a th:href="@{'/eliminarCuentaConsumo/' + ${cuentaConsumo.id}}" class="btn btn-danger btn-sm">Eliminar</a>

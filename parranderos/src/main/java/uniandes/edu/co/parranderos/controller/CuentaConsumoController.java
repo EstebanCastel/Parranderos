@@ -1,5 +1,6 @@
 package uniandes.edu.co.parranderos.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import uniandes.edu.co.parranderos.modelo.CuentaConsumo;
 import uniandes.edu.co.parranderos.repositorio.CuentaConsumoRepository;
 
@@ -32,8 +35,7 @@ public class CuentaConsumoController {
 
     @PostMapping("/crearcuentaconsumo/save")
     public String cuentaConsumoGuardar(@ModelAttribute CuentaConsumo cuentaConsumo) {
-        // Debes modificar el método del repositorio para aceptar la fecha del consumo si aún no lo has hecho
-        cuentaConsumoRepository.insertarCuentaConsumo(cuentaConsumo.getId(), cuentaConsumo.getCostoTotal(), cuentaConsumo.getHabitacion(), cuentaConsumo.getFechaDelConsumo());
+        cuentaConsumoRepository.insertarCuentaConsumo(cuentaConsumo.getId(), cuentaConsumo.getCostoTotal(), cuentaConsumo.getHabitacion(), cuentaConsumo.getFechaDelConsumo(), cuentaConsumo.getCliente().getCedula());
         return "redirect:/cuentasconsumo";
     }
 
@@ -50,8 +52,7 @@ public class CuentaConsumoController {
 
     @PostMapping("/editarCuentaConsumo/{id}/save")
     public String cuentaConsumoEditarGuardar(@PathVariable("id") Long id, @ModelAttribute CuentaConsumo cuentaConsumo) {
-        // Debes modificar el método del repositorio para aceptar la fecha del consumo si aún no lo has hecho
-        cuentaConsumoRepository.actualizarCuentaConsumo(id, cuentaConsumo.getCostoTotal(), cuentaConsumo.getFechaDelConsumo());
+        cuentaConsumoRepository.actualizarCuentaConsumo(id, cuentaConsumo.getCostoTotal(), cuentaConsumo.getFechaDelConsumo(), cuentaConsumo.getCliente().getCedula());
         return "redirect:/cuentasconsumo";
     }
 
@@ -67,6 +68,11 @@ public class CuentaConsumoController {
         model.addAttribute("resultados", resultados);
         return "dineroRecolectado";
     }
-
-
+    
+    @GetMapping("/consumoPorUsuarioYFecha")
+    public String obtenerConsumoPorUsuarioYFecha(@RequestParam("cedulaUsuario") Long cedulaUsuario, @RequestParam("fechaInicio") Date fechaInicio, @RequestParam("fechaFin") Date fechaFin, Model model) {
+        List<Object[]> resultados = cuentaConsumoRepository.obtenerConsumoPorUsuarioYFecha(cedulaUsuario, fechaInicio, fechaFin);
+        model.addAttribute("resultados", resultados);
+        return "consumoPorUsuarioYFecha";
+    }
 }

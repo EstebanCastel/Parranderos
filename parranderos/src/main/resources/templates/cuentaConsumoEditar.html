@@ -31,6 +31,13 @@
                 <input type="date" class="form-control" id="fechaDelConsumo" th:field="*{fechaDelConsumo}" required>
             </div>
 
+            <!-- Campo para Cliente (Cédula) -->
+            <div class="form-group">
+                <label for="clienteCedula">Cédula del Cliente:</label>
+                <input type="number" class="form-control" id="clienteCedula" th:field="*{cliente.cedula}" required>
+            </div>
+
+
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             <a th:href="@{/cuentasconsumo}" class="btn btn-secondary">Cancelar</a>
         </form>
