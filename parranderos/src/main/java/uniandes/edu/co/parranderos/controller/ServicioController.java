@@ -53,4 +53,15 @@ public class ServicioController {
         return "formularioServiciosMenosSolicitados";  
     }
 
+    @GetMapping("/internet")
+    public String mostrarInternet() {
+        return "internet";
+    }
+
+    @GetMapping("/piscina")
+    public String mostrarPiscina() {
+        return "piscina";
+    }
+
+
 }
