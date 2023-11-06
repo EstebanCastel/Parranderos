@@ -68,6 +68,15 @@ public class ServicioController {
         return "gym";
     }
 
+    @GetMapping("/restaurante")
+    public String mostrarRestaurante() {
+        return "restaurante";
+    }
+
+    @GetMapping("/bar")
+    public String mostrarBar() {
+        return "bar";
+    }
 
 
 }
