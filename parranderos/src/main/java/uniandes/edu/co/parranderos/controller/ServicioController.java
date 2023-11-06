@@ -78,5 +78,10 @@ public class ServicioController {
         return "bar";
     }
 
+    @GetMapping("/supermercado")
+    public String mostrarSupermercado() {
+        return "supermercado";
+    }
+
 
 }
