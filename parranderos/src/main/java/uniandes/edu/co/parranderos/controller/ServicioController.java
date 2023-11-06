@@ -63,5 +63,11 @@ public class ServicioController {
         return "piscina";
     }
 
+    @GetMapping("/gym")
+    public String mostrarGym() {
+        return "gym";
+    }
+
+
 
 }
