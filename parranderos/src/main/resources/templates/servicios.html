@@ -1,46 +1,31 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Lista de Servicios</title>
+    <title>Hotel de los Andes - Servicios</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-    <script th:src="@{/css/jquery.min.js}"></script>
-    <script th:src="@{/css/bootstrap.min.js}"></script>
 </head>
-
 <body>
-    <div class="text-center">
-        <h1>Lista de Servicios</h1>
-
-        <table class="table table-condensed table-hover table-bordered" style="border-collapse:collapse;">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>ID Hotel</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <th:block th:each="servicio : ${servicios}">
-                    <tr>
-                        <td th:text="${servicio.id}"></td>
-                        <td th:text="${servicio.nombre}"></td>
-                        <td th:text="${servicio.hotel.id}"></td>
-                        <td>
-                            <a th:href="@{'/editarServicio/' + ${servicio.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <a th:href="@{'/eliminarServicio/' + ${servicio.id}}" class="btn btn-danger btn-sm">Eliminar</a>
-                        </td>
-                    </tr>
-                </th:block>
-            </tbody>
-        </table>
-        <div class="text-center">
-            <a th:href="@{/}" class="btn btn-primary"> Volver Atrás</a>
-            <a th:href="@{/crearservicio}" class="btn btn-success">Crear Reserva</a>
-            </br>
+    <div class="container mx-auto w-25">
+        <h1>Servicios del Hotel Andes</h1>
+        <a th:href="@{/dineroRecolectado}" class="btn btn-info mb-3">REQ 2: 20 Servicios Populares</a>
+        <a th:href="@{/mostrarFormularioConsumo}" class="btn btn-info mb-3">REQ 4: Buscar Servicio</a>
+        <a th:href="@{/mostrarFormularioConsumo2}" class="btn btn-info mb-3">REQ 9: Servicios menos demandados</a>
+        <!-- Aquí van los 12 botones para los servicios -->
+        <div>
+            <a th:href="@{/internet}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Internet</a>
+            <a th:href="@{/piscina}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Piscina</a>
+            <a th:href="@{/gym}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Gym</a>
+            <a th:href="@{/restaurante}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Restaurante</a>
+            <a th:href="@{/bar}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Bar</a>
+            <a th:href="@{/supermercado}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Supermercado</a>
+            <a th:href="@{/tienda}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Tienda</a>
+            <a th:href="@{/salaReuniones}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Sala reuniones</a>
+            <a th:href="@{/salaConferencias}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Sala conferencias</a>
+            <a th:href="@{/limpieza}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Limpieza</a>
+            <a th:href="@{/prestamoUtencilios}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Préstamo utensilios</a>
+            <a th:href="@{/spa}" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;">Spa</a>
         </div>
-        <br />
+        <br/>
+    </div>
 </body>
-
 </html>
