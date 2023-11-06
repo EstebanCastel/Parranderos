@@ -29,22 +29,28 @@ public class ServicioController {
         return "formularioServiciosMasSolicitados"; 
     }
 
-
     @GetMapping("/mostrarFormularioServiciosMasSolicitados")
     public String mostrarFormularioServiciosMasSolicitados() {
-        return "formularioServiciosMasSolicitados";  // Este sería el nombre del archivo HTML del formulario para ingresar los datos de la consulta
+        return "formularioServiciosMasSolicitados";  
     }
 
     @GetMapping("/serviciosMenosSolicitados")
-    public String serviciosMenosSolicitados(@RequestParam("fechaInicio") Date fechaInicio, @RequestParam("fechaFin") Date fechaFin, Model model) {
+    public String serviciosMenosSolicitados(
+            @RequestParam(value = "fechaInicio", defaultValue = "2023-01-01") Date fechaInicio, 
+            @RequestParam(value = "fechaFin", defaultValue = "2023-12-31") Date fechaFin, 
+            Model model) {
         List<Object[]> resultados = serviciosRepository.serviciosMenosSolicitados(fechaInicio, fechaFin);
         model.addAttribute("resultados", resultados);
-        return "serviciosMenosSolicitados";  // Este sería el nombre del archivo HTML que muestra los resultados
+        return "formularioServiciosMenosSolicitados";  
     }
 
     @GetMapping("/mostrarFormularioServiciosMenosSolicitados")
-    public String mostrarFormularioServiciosMenosSolicitados() {
-        return "formularioServiciosMenosSolicitados";  // Este sería el nombre del archivo HTML del formulario para ingresar los datos de la consulta
+    public String mostrarFormularioServiciosMenosSolicitados(Model model) {
+        Date fechaInicio = Date.valueOf("2023-01-01");
+        Date fechaFin = Date.valueOf("2023-12-31");
+        List<Object[]> resultados = serviciosRepository.serviciosMenosSolicitados(fechaInicio, fechaFin);
+        model.addAttribute("resultados", resultados);
+        return "formularioServiciosMenosSolicitados";  
     }
 
 }

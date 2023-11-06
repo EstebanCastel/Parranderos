@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hotel de los Andes - Servicios Menos Demandados</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">3 Servicios Menos Demandados en 2023</h1>
+
+        <!-- Tabla para mostrar resultados -->
+        <table class="table table-condensed table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre del Servicio</th>
+                    <th>Veces Solicitado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:if="${not #lists.isEmpty(resultados)}" th:each="resultado : ${resultados}">
+                    <tr>
+                        <td th:text="${resultado[0]}"></td>
+                        <td th:text="${resultado[1]}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <a th:href="@{/servicios}" class="btn btn-primary">Volver a Servicios</a>
+        </div>
+    </div>
+</body>
+
+</html>
