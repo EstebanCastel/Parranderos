@@ -47,7 +47,8 @@ public class ReservaController {
 
     @GetMapping("/reservas")
     public String reservas(Model model) {
-        model.addAttribute("reservaciones", reservaRepository.darReservaciones());
+        // Cambia el método del repositorio por el que retorna solo los primeros 100 registros.
+        model.addAttribute("reservaciones", reservaRepository.darPrimerasCienReservaciones());
         return "reservaciones";
     }
 

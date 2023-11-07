@@ -13,8 +13,10 @@ import uniandes.edu.co.parranderos.modelo.Reserva;
 
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
-    @Query(value = "SELECT * FROM reservaciones", nativeQuery = true)
-    Collection<Reserva> darReservaciones();
+    @Query(value = "SELECT * FROM reservaciones FETCH FIRST 100 ROWS ONLY", nativeQuery = true)
+    Collection<Reserva> darPrimerasCienReservaciones();
+    
+
 
     @Modifying
     @Transactional
