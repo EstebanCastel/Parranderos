@@ -19,6 +19,10 @@ public interface CuentaConsumoRepository extends JpaRepository<CuentaConsumo, Lo
     @Query(value = "SELECT * FROM cuentasconsumo", nativeQuery = true)
     Collection<CuentaConsumo> darConsumos();
 
+    @Query(value = "SELECT * FROM cuentasconsumo FETCH FIRST 100 ROWS ONLY", nativeQuery = true)
+    Collection<CuentaConsumo> darPrimerasCienCuentasConsumo();
+
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO cuentasconsumo (ID, COSTOTOTAL, HABITACION, FECHADELCONSUMO, CLIENTE, SERVICIO) VALUES (:id, :costoTotal, :habitacionId, :fechaDelConsumo, :clienteId, :servicio)", nativeQuery = true)

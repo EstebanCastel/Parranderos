@@ -23,9 +23,10 @@ public class CuentaConsumoController {
     
     @GetMapping("/cuentasconsumo")
     public String cuentasConsumo(Model model) {
-        model.addAttribute("cuentasconsumo", cuentaConsumoRepository.darConsumos());
+        model.addAttribute("cuentasconsumo", cuentaConsumoRepository.darPrimerasCienCuentasConsumo());
         return "cuentasconsumo";
     }
+
 
     @GetMapping("/crearCuentaConsumo")
     public String cuentaConsumoForm(Model model) {
