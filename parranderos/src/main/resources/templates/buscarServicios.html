@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Buscar Servicios</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script th:src="@{/css/jquery.min.js}"></script>
+    <script th:src="@{/css/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Buscar Servicios</h1>
+
+        <!-- Formulario para ingreso de datos -->
+        <form th:action="@{/buscarServicios}" method="get">
+            <div class="form-group">
+                <label for="precio_min">Precio Mínimo:</label>
+                <input type="number" class="form-control" id="precio_min" name="precio_min" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="precio_max">Precio Máximo:</label>
+                <input type="number" class="form-control" id="precio_max" name="precio_max" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="fecha_inicio">Fecha de Inicio:</label>
+                <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
+            </div>
+            <div class="form-group">
+                <label for="fecha_fin">Fecha Final:</label>
+                <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
+            </div>
+            <div class="form-group">
+                <label for="nombre_servicio">Nombre del Servicio:</label>
+                <input type="text" class="form-control" id="nombre_servicio" name="nombre_servicio">
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+
+        <br>
+
+        <!-- Tabla para mostrar resultados -->
+        <table class="table table-condensed table-hover table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID del Servicio</th>
+            <th>Tipo del Servicio</th>
+            <th>ID del Tipo de Servicio</th>
+            <th>Fecha de Solicitud</th>
+            <th>Costo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <th:block th:if="${not #lists.isEmpty(servicios)}" th:each="servicio : ${servicios}">
+            <tr>
+                <td th:text="${servicio.id}"></td>
+                <td th:text="${servicio.servicioType}"></td>
+                <td th:text="${servicio.servicioType}"></td> <!-- Asegúrate de que esta propiedad exista en tu entidad Servicio -->
+                <td th:text="${servicio.fechaSolicitud}"></td>
+                <td th:text="${servicio.costo}"></td>
+            </tr>
+        </th:block>
+    </tbody>
+</table>
+
+        <div class="text-center">
+            <a th:href="@{/servicios}" class="btn btn-primary">Volver a Servicios</a>
+        </div>
+    </div>
+</body>
+
+</html>

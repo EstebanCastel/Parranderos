@@ -40,4 +40,6 @@ public interface ServiciosRepository extends JpaRepository<Servicio, Long> {
     "WHERE ROWNUM <= 3", nativeQuery = true)
     List<Object[]> serviciosMenosSolicitados(@Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
 
+
+    
 }

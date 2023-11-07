@@ -4,18 +4,24 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import uniandes.edu.co.parranderos.modelo.SolicitudesServicio;
 import uniandes.edu.co.parranderos.repositorio.ServiciosRepository;
+import uniandes.edu.co.parranderos.repositorio.SolicitudesServicioRepository;
 
 @Controller
 public class ServicioController {
 
     @Autowired
     private ServiciosRepository serviciosRepository;
+
+    @Autowired
+    private SolicitudesServicioRepository solicitudesservicioRepository;
 
     @GetMapping("/servicios")
     public String mostrarServicios() {
@@ -52,6 +58,22 @@ public class ServicioController {
         model.addAttribute("resultados", resultados);
         return "formularioServiciosMenosSolicitados";  
     }
+
+    @GetMapping("/buscarServicios")
+    public String buscarServicios(
+            @RequestParam(value = "precio_min", required = false) Double precioMin,
+            @RequestParam(value = "precio_max", required = false) Double precioMax,
+            @RequestParam(value = "fecha_inicio", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date fechaInicio,
+            @RequestParam(value = "fecha_fin", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date fechaFin,
+            @RequestParam(value = "nombre_servicio", required = false) String nombreServicio,
+            Model model) {
+
+        List<SolicitudesServicio> servicios = solicitudesservicioRepository.buscarServicios(
+                precioMin, precioMax, fechaInicio, fechaFin, nombreServicio);
+        model.addAttribute("servicios", servicios);
+        return "buscarServicios"; // Name of the view to render (e.g. HTML template name)
+    }
+
 
     @GetMapping("/internet")
     public String mostrarInternet() {

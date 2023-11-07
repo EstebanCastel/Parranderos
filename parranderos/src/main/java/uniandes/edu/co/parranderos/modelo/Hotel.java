@@ -26,9 +26,6 @@ public class Hotel {
     private List<Usuario> usuarios;
 
     @OneToMany(mappedBy="hotel")
-    private List<Servicio> servicios;
-
-    @OneToMany(mappedBy="hotel")
     private List<PlanConsumo> planesConsumo;
 
     @OneToMany(mappedBy="hotel")
