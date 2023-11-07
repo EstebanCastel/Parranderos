@@ -1,5 +1,7 @@
 package uniandes.edu.co.parranderos.modelo;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +35,12 @@ public class ReservaExtra {
     @ManyToOne
     @JoinColumn(name="cuentaconsumo_id", referencedColumnName = "id")
     private CuentaConsumo cuentaConsumo;
+
+    private Date reserva;
+
+    private Integer duracion;
+
+    private Long titular;
 
 
     public ReservaExtra(){;}

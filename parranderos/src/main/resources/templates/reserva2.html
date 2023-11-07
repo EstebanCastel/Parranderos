@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel de los Andes - Reservas</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+        .btn-reserva {
+            margin-bottom: 10px; /* Añadir espacio entre botones */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto w-50 text-center">
+        <h1>Reservas del Hotel Andes</h1>
+        <!-- Botones para los diferentes tipos de reservas -->
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a th:href="@{/reservasextras}" class="btn btn-primary btn-reserva">Reserva Extra</a>
+            <a th:href="@{/reservasspa}" class="btn btn-primary btn-reserva">Reserva Spa</a>
+            <a th:href="@{/reservassala}" class="btn btn-primary btn-reserva">Reserva Sala</a>
+        </div>
+        <!-- Botón para volver a la página principal -->
+        <div class="text-center mt-3">
+            <a th:href="@{/}" class="btn btn-primary">Volver Atrás</a>
+        </div>
+    </div>
+</body>
+</html>

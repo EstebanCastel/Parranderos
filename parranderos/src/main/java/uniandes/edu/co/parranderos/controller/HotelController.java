@@ -56,5 +56,11 @@ public class HotelController {
         model.addAttribute("clientesExcelentes", listaClientesExcelentes);
         return "clientesExcelentes"; // Asegúrate de tener una vista llamada 'clientesExcelentes.html' en tu carpeta de templates
     }
+
+    @GetMapping("/reserva2")
+    public String mostrarReserva2() {
+        return "reserva2"; // Asegúrate de que 'reserva2' es el nombre del archivo HTML en resources/templates
+    }
+
     
 }
