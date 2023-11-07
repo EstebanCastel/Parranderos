@@ -49,4 +49,12 @@ public class HotelController {
 
         return "resumenFuncionamiento";
     }
+
+    @GetMapping("/clientesExcelentes")
+    public String clientesExcelentes(Model model) {
+        List<Object[]> listaClientesExcelentes = hotelRepository.obtenerClientesExcelentes();
+        model.addAttribute("clientesExcelentes", listaClientesExcelentes);
+        return "clientesExcelentes"; // Asegúrate de tener una vista llamada 'clientesExcelentes.html' en tu carpeta de templates
+    }
+    
 }

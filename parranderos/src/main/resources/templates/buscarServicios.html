@@ -54,7 +54,6 @@
         <th:block th:if="${not #lists.isEmpty(servicios)}" th:each="servicio : ${servicios}">
             <tr>
                 <td th:text="${servicio.id}"></td>
-                <td th:text="${servicio.servicioType}"></td>
                 <td th:text="${servicio.servicioType}"></td> <!-- Asegúrate de que esta propiedad exista en tu entidad Servicio -->
                 <td th:text="${servicio.fechaSolicitud}"></td>
                 <td th:text="${servicio.costo}"></td>

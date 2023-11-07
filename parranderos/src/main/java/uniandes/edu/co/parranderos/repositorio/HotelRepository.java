@@ -108,4 +108,36 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
            nativeQuery = true)
     List<Object[]> obtenerHabitacionMaxMinPorSemana();
 
+    @Query(value = "WITH CheckInOut AS (" +
+                   "SELECT r.TITULAR_ID " +
+                   "FROM estadias e " +
+                   "JOIN reservaciones r ON e.RESERVA_ID = r.ID " +
+                   "WHERE e.CHECKIN_REALIZADO = 1 AND e.CHECKOUT_REALIZADO = 1), " +
+                   "ConsumosCostosos AS (" +
+                   "SELECT c.CLIENTE " +
+                   "FROM cuentasconsumo c " +
+                   "WHERE c.COSTOTOTAL > 300000 " +
+                   "GROUP BY c.CLIENTE, TO_CHAR(c.FECHADELCONSUMO, 'YYYY'), TO_CHAR(c.FECHADELCONSUMO, 'Q') " +
+                   "HAVING COUNT(DISTINCT TO_CHAR(c.FECHADELCONSUMO, 'Q')) >= 1), " +
+                   "ServiciosLargos AS (" +
+                   "SELECT sp.TITULAR AS CLIENTE " +
+                   "FROM reservaspas sp " +
+                   "WHERE sp.DURACION > 4 " +
+                   "UNION " +
+                   "SELECT sa.TITULAR AS CLIENTE " +
+                   "FROM reservasalas sa " +
+                   "WHERE sa.DURACION > 4) " +
+                   "SELECT cl.CEDULA, cl.NOMBRE, " +
+                   "CASE " +
+                   "WHEN cl.CEDULA IN (SELECT TITULAR_ID FROM CheckInOut) THEN 'Check-in y check-out' " +
+                   "WHEN cl.CEDULA IN (SELECT CLIENTE FROM ConsumosCostosos) THEN 'Consumo en servicios mayor a 300000' " +
+                   "WHEN cl.CEDULA IN (SELECT CLIENTE FROM ServiciosLargos) THEN 'Reservas en spa o sala por más de 4 horas' " +
+                   "END AS RAZON " +
+                   "FROM clientes cl " +
+                   "WHERE cl.CEDULA IN (SELECT TITULAR_ID FROM CheckInOut) " +
+                   "OR cl.CEDULA IN (SELECT CLIENTE FROM ConsumosCostosos) " +
+                   "OR cl.CEDULA IN (SELECT CLIENTE FROM ServiciosLargos)",
+           nativeQuery = true)
+    List<Object[]> obtenerClientesExcelentes();
+
 }
