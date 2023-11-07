@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spas</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="text-center">
+        <h1>Spas</h1>
+        <table class="table table-condensed table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Duración</th>
+                    <th>Costo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="spa : ${spas}">
+                    <tr>
+                        <td th:text="${spa.id}"></td>
+                        <td th:text="${spa.nombre}"></td>
+                        <td th:text="${spa.descripcion}"></td>
+                        <td th:text="${spa.duracion}"></td>
+                        <td th:text="${spa.costo}"></td>
+                        <td>
+                            <a th:href="@{'/editarSpa/' + ${spa.id}}" class="btn btn-warning btn-sm">Editar</a>
+                            <a th:href="@{'/eliminarSpa/' + ${spa.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    <div class="text-center">
+        <a th:href="@{/servicios}" class="btn btn-primary"> Volver a Servicios</a>
+        <a th:href="@{/creartienda}" class="btn btn-success">Agregar Spa</a>
+    </div>
+</body>
+</html>

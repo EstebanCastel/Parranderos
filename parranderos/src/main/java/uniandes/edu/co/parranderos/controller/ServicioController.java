@@ -83,5 +83,38 @@ public class ServicioController {
         return "supermercado";
     }
 
+    @GetMapping("/tienda")
+    public String mostrarTienda() {
+        return "tienda";
+    }
+
+
+    @GetMapping("/salaconferencia")
+    public String mostrarSalaconferencia() {
+        return "salaconferencia";
+    }
+
+    @GetMapping("/salareunion")
+    public String mostrarSalareunion() {
+        return "salareunion";
+    }
+
+    @GetMapping("/limpieza")
+    public String mostrarLimpieza() {
+        return "limpieza";
+    }
+
+    @GetMapping("/prestamoutencilio")
+    public String mostrarPrestamoutencilio() {
+        return "prestamoutencilio";
+    }
+
+    @GetMapping("/spa")
+    public String mostrarSpa() {
+        return "spa";
+    }
+
+    
+
 
 }
