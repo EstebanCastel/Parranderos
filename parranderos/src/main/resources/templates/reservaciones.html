@@ -3,16 +3,18 @@
 
 <head>
     <title>Lista Reservas</title>
+    <!-- Asegúrate de que la ruta del archivo CSS está correcta -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-    <script th:src="@{/css/jquery.min.js}"></script>
-    <script th:src="@{/css/bootstrap.min.js}"></script>
+    <!-- Asegúrate de que la ruta de los archivos JS están correctas -->
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 
 <body>
-    <div class="text-center">
+    <div class="container text-center">
         <h1>Lista de Reservas</h1>
         <a th:href="@{/porcentajeOcupacion}" class="btn btn-info mb-3">REQ 3: Porcentaje de ocupacion</a>
-        <table class="table table-condensed table-hover table-bordered" style="border-collapse:collapse;">
+        <table class="table table-condensed table-hover table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
@@ -21,41 +23,37 @@
                     <th>Cantidad Personas</th>
                     <th>ID Hotel</th>
                     <th>Nombre Plan Consumo</th>
-                    <th>Tipo Habitación</th> <!-- Añadido -->
+                    <th>Tipo Habitación</th>
                     <th>Habitación</th>
-                    <th>Cédula Titular</th> <!-- Añadido -->
+                    <th>Cédula Titular</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <th:block th:each="reserva : ${reservaciones}">
-                    <tr>
-                        <td th:text="${reserva.id}"></td>
-                        <td th:text="${reserva.fechaLlegada}"></td>
-                        <td th:text="${reserva.fechaSalida}"></td>
-                        <td th:text="${reserva.cantidadPersonas}"></td>
-                        <td th:text="${reserva.hotel.id}"></td>
-                        <td th:text="${reserva.planConsumo.info}"></td>
-                        <td th:text="${reserva.tipoHabitacion.nombre}"></td> <!-- Añadido -->
-                        <td th:text="${reserva.habitacion.id}"></td> 
-                        <td th:text="${reserva.titular.cedula}"></td> <!-- Añadido -->
-                        <td>
-                            <a th:href="@{'/editarReserva/' + ${reserva.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <!-- Formulario para eliminar -->
-                            <form th:action="@{'/eliminarReserva/' + ${reserva.id}}" method="post" style="display:inline;">
-                                <input type="submit" value="Eliminar" class="btn btn-danger btn-sm">
-                            </form>
-                        </td>
-                    </tr>
-                </th:block>
+                <tr th:each="reserva : ${reservaciones}">
+                    <td th:text="${reserva.id}"></td>
+                    <td th:text="${reserva.fechaLlegada}"></td>
+                    <td th:text="${reserva.fechaSalida}"></td>
+                    <td th:text="${reserva.cantidadPersonas}"></td>
+                    <td th:text="${reserva.hotel.id}"></td>
+                    <td th:text="${reserva.planConsumo.info}"></td>
+                    <td th:text="${reserva.tipoHabitacion.nombre}"></td>
+                    <td th:text="${reserva.habitacion.id}"></td>
+                    <td th:text="${reserva.titular.cedula}"></td>
+                    <td>
+                        <a th:href="@{'/editarReserva/' + ${reserva.id}}" class="btn btn-warning btn-sm">Editar</a>
+                        <form th:action="@{'/eliminarReserva/' + ${reserva.id}}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
             </tbody>
         </table>
-        <div class="text-center">
-            <a th:href="@{/}" class="btn btn-primary"> Volver Atrás</a>
+        <!-- Botones para volver atrás y crear reserva -->
+        <div>
+            <a th:href="@{/}" class="btn btn-primary">Volver Atrás</a>
             <a th:href="@{/crearreserva}" class="btn btn-success">Crear Reserva</a>
-            </br>
         </div>
-        <br />
     </div>
 </body>
 

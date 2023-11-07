@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 import java.sql.Date;
@@ -23,7 +24,8 @@ import lombok.Setter;
 public class CuentaConsumo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cuentasconsumo_seq_generator")
+    @SequenceGenerator(name = "cuentasconsumo_seq_generator", sequenceName = "cuentasconsumo_SEQ", allocationSize = 1)
     private Long id;
 
     @Column(name = "COSTOTOTAL")

@@ -61,19 +61,16 @@
                 </select>
             </div>
 
+            <!-- Campo Habitación ID -->
             <div class="form-group">
                 <label>Habitación ID</label>
-                <select th:field="*{habitacion.id}" class="form-control">
-                    <option th:each="habitacion : ${habitaciones}" th:value="${habitacion.id}" th:text="${habitacion.id}"></option>
-                </select>
+                <input type="text" th:field="*{habitacion.id}" class="form-control" required placeholder="Ingrese el número de habitación">
             </div>
 
-            <!-- Dropdown para Cédula del Titular -->
+            <!-- Campo Cédula Titular -->
             <div class="form-group">
                 <label>Cédula Titular</label>
-                <select th:field="*{titular.cedula}" class="form-control">
-                    <option th:each="cliente : ${clientes}" th:value="${cliente.cedula}" th:text="${cliente.cedula}"></option>
-                </select>
+                <input type="text" th:field="*{titular.cedula}" class="form-control" required placeholder="Ingrese la cédula del titular">
             </div>
 
             <!-- Botones de Guardar y Cancelar -->

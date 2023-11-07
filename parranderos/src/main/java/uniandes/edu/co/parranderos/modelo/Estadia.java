@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import lombok.Getter;
@@ -20,8 +21,10 @@ import lombok.Setter;
 public class Estadia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estadias_seq_generator")
+    @SequenceGenerator(name = "estadias_seq_generator", sequenceName = "estadias_SEQ", allocationSize = 1)
     private Long id;
+
 
     @Column(name="PAZYSALVO")
     private Boolean pazYsalvo;
