@@ -28,9 +28,10 @@ public class EstadiaController {
 
     @GetMapping("/estadias")
     public String estadias(Model model) {
-        model.addAttribute("estadias", estadiaRepository.darEstadias());
+        model.addAttribute("estadias", estadiaRepository.darPrimerasCienEstadias());
         return "estadias";
     }
+
 
     @GetMapping("/crearestadia")
     public String estadiaForm(Model model) {

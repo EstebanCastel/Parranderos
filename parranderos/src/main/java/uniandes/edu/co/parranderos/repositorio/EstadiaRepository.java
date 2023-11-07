@@ -16,6 +16,10 @@ public interface EstadiaRepository extends JpaRepository<Estadia, Long> {
     Collection<Estadia> darEstadias();
 
     
+    @Query(value = "SELECT * FROM estadias FETCH FIRST 100 ROWS ONLY", nativeQuery = true)
+    Collection<Estadia> darPrimerasCienEstadias();
+
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO estadias (ID, RESERVA_ID, CUENTACONSUMO_ID, PAZYSALVO, CHECKIN, CHECKOUT, CHECKIN_REALIZADO, CHECKOUT_REALIZADO) VALUES (:id, :reserva_id, :cuentaConsumo_id, :pazYsalvo, :checkin, :checkout, 0, 0)", nativeQuery = true)
