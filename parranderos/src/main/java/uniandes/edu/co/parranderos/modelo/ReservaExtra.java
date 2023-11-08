@@ -38,10 +38,6 @@ public class ReservaExtra {
 
     private Date reserva;
 
-    private Integer duracion;
-
-    private Long titular;
-
 
     public ReservaExtra(){;}
 }

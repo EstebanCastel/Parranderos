@@ -18,11 +18,6 @@
                     <th>ID</th>
                     <th>Costo</th>
                     <th>Reserva</th>
-                    <th>Duración</th>
-                    <th>Titular</th>
-                    <th>Limpieza ID</th>
-                    <th>Prestamo Utencilios ID</th>
-                    <th>Cuenta Consumo ID</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -32,11 +27,6 @@
                         <td th:text="${reservaExtra.id}"></td>
                         <td th:text="${reservaExtra.costo}"></td>
                         <td th:text="${reservaExtra.reserva}"></td> <!-- Asegúrate de formatear la fecha correctamente -->
-                        <td th:text="${reservaExtra.duracion}"></td>
-                        <td th:text="${reservaExtra.titular}"></td> <!-- Puede necesitar ajustes si titular es un objeto -->
-                        <td th:text="${reservaExtra.limpieza.id}"></td>
-                        <td th:text="${reservaExtra.prestamoUtencilios.id}"></td>
-                        <td th:text="${reservaExtra.cuentaConsumo.id}"></td>
                         <td>
                             <a th:href="@{'/editarReservaExtra/' + ${reservaExtra.id}}" class="btn btn-warning btn-sm">Editar</a>
                             <a th:href="@{'/eliminarReservaExtra/' + ${reservaExtra.id}}" class="btn btn-danger btn-sm">Eliminar</a>
