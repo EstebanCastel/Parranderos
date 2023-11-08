@@ -10,26 +10,29 @@ import java.util.List;
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
-    @Query(value = "SELECT FECHALLEGADA, COUNT(HABITACION_ID) AS NumeroHabitacionesOcupadas " +
-                   "FROM reservaciones " +
-                   "GROUP BY FECHALLEGADA " +
-                   "ORDER BY NumeroHabitacionesOcupadas DESC", 
-           nativeQuery = true)
-    List<Object[]> obtenerFechasMayorOcupacion();
+        @Query(value = "SELECT * FROM (SELECT FECHALLEGADA, COUNT(HABITACION_ID) AS NumeroHabitacionesOcupadas " +
+        "FROM reservaciones " +
+        "GROUP BY FECHALLEGADA " +
+        "ORDER BY NumeroHabitacionesOcupadas DESC) " +
+        "WHERE ROWNUM <= 100", 
+        nativeQuery = true)
+        List<Object[]> obtenerFechasMayorOcupacion();
 
-    @Query(value = "SELECT FECHALLEGADA, COUNT(HABITACION_ID) AS NumeroHabitacionesOcupadas " +
-                   "FROM reservaciones " +
-                   "GROUP BY FECHALLEGADA " +
-                   "ORDER BY NumeroHabitacionesOcupadas ASC", 
-           nativeQuery = true)
-    List<Object[]> obtenerFechasMenorOcupacion();
+        @Query(value = "SELECT * FROM (SELECT FECHALLEGADA, COUNT(HABITACION_ID) AS NumeroHabitacionesOcupadas " +
+        "FROM reservaciones " +
+        "GROUP BY FECHALLEGADA " +
+        "ORDER BY NumeroHabitacionesOcupadas ASC) " +
+        "WHERE ROWNUM <= 100", 
+        nativeQuery = true)
+        List<Object[]> obtenerFechasMenorOcupacion();
 
-    @Query(value = "SELECT FECHADELCONSUMO, SUM(COSTOTOTAL) AS IngresosTotales " +
-                   "FROM cuentasconsumo " +
-                   "GROUP BY FECHADELCONSUMO " +
-                   "ORDER BY IngresosTotales DESC", 
-           nativeQuery = true)
-    List<Object[]> obtenerFechasMayoresIngresos();
+        @Query(value = "SELECT * FROM (SELECT FECHADELCONSUMO, SUM(COSTOTOTAL) AS IngresosTotales " +
+        "FROM cuentasconsumo " +
+        "GROUP BY FECHADELCONSUMO " +
+        "ORDER BY IngresosTotales DESC) " +
+        "WHERE ROWNUM <= 100", 
+        nativeQuery = true)
+        List<Object[]> obtenerFechasMayoresIngresos();
 
     @Query(value = "WITH DiasEstadia AS (" +
                    "SELECT r.TITULAR_ID AS CLIENTE, " +

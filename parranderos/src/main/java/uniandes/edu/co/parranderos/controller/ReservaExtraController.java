@@ -5,9 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import uniandes.edu.co.parranderos.modelo.ReservaExtra;
@@ -32,11 +32,11 @@ public class ReservaExtraController {
         return "reservaExtraNuevo";
     }
 
-    @PostMapping("/crearreservaextra/save")
-    public String reservaExtraGuardar(@ModelAttribute ReservaExtra reservaExtra) {
-        reservaExtraRepository.insertarReservaExtra(reservaExtra.getId(), reservaExtra.getCosto(), reservaExtra.getReserva(), reservaExtra.getDuracion(), reservaExtra.getTitular());
-        return "redirect:/reservasextras";
-    }
+   // @PostMapping("/crearreservaextra/save")
+    //public String reservaExtraGuardar(@ModelAttribute ReservaExtra reservaExtra) {
+      //  reservaExtraRepository.insertarReservaExtra(reservaExtra.getId(), reservaExtra.getCosto(), reservaExtra.getReserva(), reservaExtra.getDuracion(), reservaExtra.getTitular());
+        //return "redirect:/reservasextras";
+    //}
 
     @GetMapping("/editarReservaExtra/{id}")
     public String reservaExtraEditarForm(@PathVariable("id") Long id, Model model) {
@@ -49,11 +49,11 @@ public class ReservaExtraController {
         }
     }
 
-    @PostMapping("/editarReservaExtra/{id}/save")
-    public String reservaExtraEditarGuardar(@PathVariable("id") Long id, @ModelAttribute ReservaExtra reservaExtra) {
-        reservaExtraRepository.actualizarReservaExtra(id, reservaExtra.getCosto(), reservaExtra.getReserva(), reservaExtra.getDuracion(), reservaExtra.getTitular());
-        return "redirect:/reservasextras";
-    }
+    //@PostMapping("/editarReservaExtra/{id}/save")
+    //public String reservaExtraEditarGuardar(@PathVariable("id") Long id, @ModelAttribute ReservaExtra reservaExtra) {
+      //  reservaExtraRepository.actualizarReservaExtra(id, reservaExtra.getCosto(), reservaExtra.getReserva(), reservaExtra.getDuracion(), reservaExtra.getTitular());
+        //return "redirect:/reservasextras";
+    //}
 
     @GetMapping("/eliminarReservaExtra/{id}")
     public String reservaExtraEliminar(@PathVariable("id") long id, RedirectAttributes redirectAttrs) {
